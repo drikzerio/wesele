@@ -89,7 +89,7 @@ h2 {
 .mapa-box p {
   margin-top: 0.5rem;
   font-weight: bold;
-  font-size: 28px; /* powiększona czcionka */
+  font-size: 28px;
   text-align: center;
   color: #333;
 }
@@ -168,7 +168,6 @@ Jakub Knap - 518 590 326<br>
 </div>
 </section>
 
-<!-- Muzyka -->
 <audio id="muzyka" loop>
   <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
 </audio>
@@ -177,45 +176,39 @@ Jakub Knap - 518 590 326<br>
 // Countdown
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdownElement = document.getElementById('countdown');
-
 setInterval(() => {
   const now = new Date().getTime();
   const distance = weddingDate - now;
-
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
   countdownElement.innerHTML = `${days} dni ${hours} godzin ${minutes} minut ${seconds} sekund`;
-
   if (distance < 0) {
     clearInterval();
     countdownElement.innerHTML = "To już dziś!";
   }
 }, 1000);
 
-// Start muzyki po scrollu, dotknięciu lub kliknięciu
+// Muzyka start
 const muzyka = document.getElementById('muzyka');
 let muzykaStarted = false;
 function startMuzyka() {
   if (!muzykaStarted) {
     muzyka.play().catch(e => console.log("Autoplay zablokowany:", e));
     muzykaStarted = true;
-    window.removeEventListener('scroll', startMuzyka);
-    window.removeEventListener('touchstart', startMuzyka);
-    window.removeEventListener('click', startMuzyka);
   }
 }
-window.addEventListener('scroll', startMuzyka, {passive:true});
-window.addEventListener('touchstart', startMuzyka);
-window.addEventListener('click', startMuzyka);
+// kliknięcie anywhere + scroll + touch
+document.addEventListener('click', startMuzyka, {once:true});
+document.addEventListener('scroll', startMuzyka, {once:true, passive:true});
+document.addEventListener('touchstart', startMuzyka, {once:true});
 
-// Dopasowanie wysokości RSVP iframe do zawartości (przybliżone)
+// Dynamiczna wysokość RSVP
 function adjustRSVP() {
   const iframe = document.getElementById('rsvpForm');
   const width = window.innerWidth;
-  if (width <= 768) {
+  if(width <= 768){
     iframe.style.height = '1500px';
   } else {
     iframe.style.height = '1200px';
