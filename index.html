@@ -16,14 +16,14 @@ body {
   line-height: 1.8;
   margin: 0;
   padding: 0;
-  background: #fffafc;
-  color: #333;
+  background: #fdfaf4; /* jasny beż */
+  color: #55584a; /* ciemniejszy tekst */
   overflow-x: hidden;
 }
 
 header {
-  background: linear-gradient(135deg, #ff6fa9, #ffb6c1);
-  color: white;
+  background: linear-gradient(135deg, #c5d3a0, #e6e9d2); /* delikatna oliwka pastelowa */
+  color: #55584a;
   text-align: center;
   padding: 4rem 1rem;
   position: relative;
@@ -39,7 +39,7 @@ header h1 {
 
 #countdown {
   font-size: 2rem;
-  color: #fff;
+  color: #9aa67f; /* oliwkowy akcent */
   font-weight: bold;
   margin-top: 1rem;
   position: relative;
@@ -53,7 +53,7 @@ header::before {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: url('https://images.unsplash.com/photo-1519985176271-adb1088fa94c?fit=crop&w=1400&q=80') center/cover no-repeat;
-  opacity: 0.1;
+  opacity: 0.05;
   z-index: 1;
   transform: translateY(0px);
   transition: transform 0.2s ease-out;
@@ -74,7 +74,7 @@ section.visible {
 }
 
 h2 {
-  color: #ff6fa9;
+  color: #9aa67f; /* nagłówki oliwkowe */
   margin-bottom: 1rem;
   text-align: center;
   font-size: 2.8rem;
@@ -86,7 +86,7 @@ h2 {
 }
 
 .timeline {
-  background: #ffeef5;
+  background: #f3f4e7; /* bardzo jasna oliwka */
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
@@ -125,12 +125,12 @@ h2 {
   font-weight: bold;
   font-size: 28px;
   text-align: center;
-  color: #333;
+  color: #55584a;
 }
 
 #rsvp h2 {
   font-size: 28px;
-  color: #ff6fa9;
+  color: #9aa67f;
   text-align: center;
 }
 
@@ -269,13 +269,6 @@ const observer = new IntersectionObserver(entries => {
 },{threshold: 0.2});
 sections.forEach(section => observer.observe(section));
 
-// --- Parallax header ---
-window.addEventListener('scroll', () => {
-  const offset = window.scrollY * 0.2;
-  document.querySelector('header::before');
-  document.querySelector('header::before').style.transform = `translateY(${offset}px)`;
-});
-
 // --- Dynamic RSVP height ---
 function adjustRSVP() {
   const iframe = document.getElementById('rsvpForm');
@@ -288,7 +281,7 @@ function adjustRSVP() {
 }
 window.addEventListener('load', adjustRSVP);
 window.addEventListener('resize', adjustRSVP);
-
 </script>
 </body>
 </html>
+
