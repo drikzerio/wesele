@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Martyna | Damian</title>
-  <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap&subset=latin,latin-ext" rel="stylesheet">
+
+  <!-- Google Fonts: Carattere -->
+  <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: 'Ephesis', cursive;
+      font-family: 'Carattere', cursive; /* cała strona w Carattere */
+      font-size: 18px; /* powiększony tekst */
       line-height: 1.6;
-      font-size: 18px;
       margin: 0;
       padding: 0;
       background: #fffafc;
@@ -24,7 +27,7 @@
     }
 
     header h1 {
-      font-size: 3rem;
+      font-size: 4rem; /* większy nagłówek */
       margin-bottom: 0.5rem;
     }
 
@@ -44,7 +47,12 @@
     h2 {
       color: #ff6fa9;
       margin-bottom: 1rem;
-      text-align: center;
+      text-align: center; /* wszystkie nagłówki wyśrodkowane */
+      font-size: 2.5rem; /* większe nagłówki */
+    }
+
+    p {
+      font-size: 1.2rem; /* większe paragrafy */
     }
 
     .timeline {
@@ -79,6 +87,10 @@
     .mapa-box p {
       margin-top: 0.5rem;
       font-weight: bold;
+    }
+
+    #rsvp h2, #rsvp p {
+      text-align: center; /* wyśrodkowanie nagłówka i opisu RSVP */
     }
 
     .rsvp {
@@ -129,8 +141,8 @@
   <section id="harmonogram">
     <h2>Harmonogram</h2>
     <div class="timeline">
-      <p>Msza Święta: 14:00 – Kościół Św. Marii Magdaleny</p>
-      <p>Przyjęcie weselne: 16:00 – Karczma Pod Szczęśliwym Karpiem</p>
+      <p>⛪ Ceremonia: 14:00 – Kościół Św. Marii Magdaleny</p>
+      <p>🍽️ Wesele: 16:00 – Karczma Pod Szczęśliwym Karpiem</p>
     </div>
   </section>
 
@@ -138,11 +150,11 @@
     <h2>Mapy dojazdu</h2>
     <div class="mapa">
       <div class="mapa-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897251180463!2d22.7120323!3d50.5232002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757284595506!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5073.062494847719!2d22.709312540151284!3d50.524288141133134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757285314614!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <p>Kościół</p>
       </div>
       <div class="mapa-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.8201325405716!2d23.190974300000004!3d50.3297233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e1!3m2!1spl!2spl!4v1757284650385!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7203.860642543343!2d23.186963543398253!3d50.33019609865425!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757285361593!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <p>Sala weselna</p>
       </div>
     </div>
@@ -156,6 +168,7 @@
 
   <audio autoplay loop>
     <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
+    
   </audio>
 
   <script>
