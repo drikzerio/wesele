@@ -81,14 +81,14 @@
     /* RSVP */
     .rsvp {
       width: 100%;
-      height: 1200px; /* podstawowa wysokość */
       border: none;
       border-radius: 12px;
+      height: 1200px; /* wysokość dla desktop */
     }
 
-    @media (min-width: 1200px) {
+    @media (max-width: 768px) {
       .rsvp {
-        min-height: 2000px;
+        height: 1800px; /* wyższa wysokość na mobile/tablet */
       }
     }
 
@@ -119,7 +119,7 @@
       Amelia Grzywaczewska - 663 570 970<br>
       Dominik Kościk - 531 610 069<br>
       Joanna Zych - 694 307 639<br>
-      Jakub Knap - 518 590 326<br>
+      Jakub Knap - 518 590 326
     </p>
   </section>
 
@@ -146,10 +146,14 @@
   </section>
 
   <section id="rsvp">
-    <h2>Potwierdź swoją obecność</h2>
+    <h2>Potwierdź swoją obecność (RSVP)</h2>
     <p>Prosimy o wypełnienie poniższego formularza, abyśmy mogli przygotować się na wspólne świętowanie.</p>
     <!-- ZAMIEN TEN LINK na własny link do Google Forms -->
     <iframe class="rsvp" src="https://docs.google.com/forms/d/e/1FAIpQLSf6_4TFXop9vRDwmkQ1h4IN9ItVuW5Xz6FyjyRQ9GusoWDFlQ/viewform?usp=header">Ładowanie…</iframe>
-  
+  </section>
+
+  <footer>
+    <p>© 2025 Martyna & Damian</p>
+  </footer>
 </body>
 </html>
