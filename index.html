@@ -3,118 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Martyna | Damian</title>
- <style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background: #fffafc;
-    color: #333;
-  }
-
-  header {
-    background: linear-gradient(135deg, #ff6fa9, #ffb6c1);
-    color: white;
-    text-align: center;
-    padding: 4rem 1rem;
-  }
-
-  header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  header p {
-    font-size: 1.2rem;
-  }
-
-  section {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  h2 {
-    color: #ff6fa9;
-    margin-bottom: 1rem;
-  }
-
-  .timeline {
-    background: #ffeef5;
-    border-radius: 12px;
-    padding: 1rem;
-  }
-
-  /* MAPA */
-  .mapa {
-    width: 100%;
-    min-height: 400px;
-    border: none;
-    border-radius: 12px;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .mapa div {
-    flex: 1 1 400px;
-    margin-bottom: 1rem;
-  }
-
-  /* RSVP */
-  .rsvp {
-    width: 100%;
-    min-height: 1800px; /* zwiększona wysokość formularza */
-    border: none;
-    border-radius: 12px;
-  }
-
-  /* RESPONSYWNOŚĆ */
-  @media (min-width: 1200px) {
-    .rsvp {
-      min-height: 2000px; /* jeszcze większa wysokość na dużych ekranach */
+  <title>Martyna | Damian</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #fffafc;
+      color: #333;
     }
-  }
 
-  footer {
-    background: #ff6fa9;
-    color: white;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    margin-top: 3rem;
-  }
-</style>
+    header {
+      background: linear-gradient(135deg, #ff6fa9, #ffb6c1);
+      color: white;
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    h2 {
+      color: #ff6fa9;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .timeline {
+      background: #ffeef5;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* Tekst do lewej w sekcji świadków */
+    #drodzy p {
+      text-align: left;
+    }
+
+    /* Mapy */
+    .mapa {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .mapa-box {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .mapa-box iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 12px;
+    }
+
+    .mapa-box p {
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+
+    /* RSVP */
+    .rsvp {
+      width: 100%;
+      min-height: 1800px; /* podstawowa wysokość */
+      border: none;
+      border-radius: 12px;
+    }
+
+    @media (min-width: 1200px) {
+      .rsvp {
+        min-height: 2000px;
+      }
+    }
+
+    footer {
+      background: #ff6fa9;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 3rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Martyna | Damian </h1>
-
+    <h1>Martyna | Damian</h1>
   </header>
 
   <section id="drodzy!">
     <h2>Drodzy!</h2>
     <p>
+      Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele Św. Marii Magdaleny w Biłgoraju.<br><br>
 
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele Św. Marii Magdaleny w Biłgoraju.
+      Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Dębowym Dworze w Rudzie Różanieckiej.<br><br>
 
-Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne które odbędzie się w Dębowym Dworze w Rudzie Różanieckiej.
+      Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do xxx.<br><br>
 
-Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do xxx.
-
-
-W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami:<br>
-
-Amelia Grzywaczewska - 663 570 970<br>
-Dominik Kościk - 531 610 069<br>
-Joanna Zych - 694 307 639<br>
-Jakub Knap - 518 590 326<br>
+      W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami:<br>
+      Amelia Grzywaczewska - 663 570 970<br>
+      Dominik Kościk - 531 610 069<br>
+      Joanna Zych - 694 307 639<br>
+      Jakub Knap - 518 590 326<br>
     </p>
-    </section>
-      
+  </section>
+
   <section id="harmonogram">
     <h2>Harmonogram</h2>
     <div class="timeline">
@@ -123,28 +131,25 @@ Jakub Knap - 518 590 326<br>
     </div>
   </section>
 
-<section id="mapa">
-    <h2>Kościół</h2>
-  <div class="mapa">
-    <div>
-    <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3104.9326298249102!2d22.711746368886935!3d50.523032853593975!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757276596074!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <section id="mapa">
+    <h2>Mapa dojazdu</h2>
+    <div class="mapa">
+      <div class="mapa-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3104.9326298249102!2d22.711746368886935!3d50.523032853593975!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757276596074!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+        <p>⛪ Kościół</p>
+      </div>
+      <div class="mapa-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3028.884564360719!2d23.188141570679093!3d50.32965847800444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757278923949!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+        <p>🍽️ Sala weselna</p>
+      </div>
     </div>
-    <div>
-    <h2>Sala weselna</h2>
-    <!-- Google Maps iframe (przykładowy) -->
-    <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3028.884564360719!2d23.188141570679093!3d50.32965847800444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757278923949!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    </section>
-  
- 
-<section id="rsvp">
+  </section>
+
+  <section id="rsvp">
     <h2>Potwierdź swoją obecność (RSVP)</h2>
     <p>Prosimy o wypełnienie poniższego formularza, abyśmy mogli przygotować się na wspólne świętowanie.</p>
     <!-- ZAMIEN TEN LINK na własny link do Google Forms -->
     <iframe class="rsvp" src="https://docs.google.com/forms/d/e/1FAIpQLSf6_4TFXop9vRDwmkQ1h4IN9ItVuW5Xz6FyjyRQ9GusoWDFlQ/viewform?usp=header">Ładowanie…</iframe>
-  </section>
-    
   
-    
 </body>
 </html>
