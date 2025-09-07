@@ -8,11 +8,13 @@
   <!-- Google Fonts: Carattere -->
   <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
 
+  
+
   <style>
     body {
-      font-family: 'Carattere', cursive; /* cała strona w Carattere */
-      font-size: 18px; /* powiększony tekst ogólny */
-      line-height: 1.6;
+      font-family: 'Carattere', cursive;
+      font-size: 20px; /* większy tekst ogólny */
+      line-height: 1.8; /* trochę więcej odstępu */
       margin: 0;
       padding: 0;
       background: #fffafc;
@@ -27,7 +29,7 @@
     }
 
     header h1 {
-      font-size: 4rem; /* większy nagłówek */
+      font-size: 4rem;
       margin-bottom: 0.5rem;
     }
 
@@ -48,16 +50,13 @@
       color: #ff6fa9;
       margin-bottom: 1rem;
       text-align: center;
-      font-size: 2.5rem; /* większe nagłówki */
+      font-size: 2.8rem; /* większe nagłówki */
     }
 
-    p {
-      font-size: 1.2rem; /* większe paragrafy ogólnie */
-    }
-
-    /* Powiększony i wyśrodkowany tekst w sekcji "Drodzy!" */
+    /* Sekcja "Drodzy!" większy tekst */
     #drodzy p {
-      font-size: 20px;
+      font-size: 22px; 
+      line-height: 2;
     }
 
     .timeline {
@@ -65,6 +64,7 @@
       border-radius: 12px;
       padding: 1rem;
       text-align: center;
+      font-size: 20px; /* większy tekst w harmonogramie */
     }
 
     .mapa {
@@ -94,9 +94,9 @@
       font-weight: bold;
     }
 
-    /* Wyśrodkowanie nagłówka i opisu RSVP */
     #rsvp h2, #rsvp p {
       text-align: center;
+      font-size: 22px; /* większy tekst */
     }
 
     .rsvp {
@@ -110,31 +110,6 @@
       .rsvp {
         height: 1800px;
       }
-    }
-
-    footer {
-      background: #ff6fa9;
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 3rem;
-    }
-
-    /* Przycisk muzyki */
-    #playButton {
-      display: block;
-      margin: 1rem auto;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #ff6fa9;
-      color: white;
-      cursor: pointer;
-    }
-
-    #playButton:hover {
-      background: #ffb6c1;
     }
   </style>
 </head>
@@ -189,15 +164,10 @@
     <iframe class="rsvp" src="https://docs.google.com/forms/d/e/1FAIpQLSf6_4TFXop9vRDwmkQ1h4IN9ItVuW5Xz6FyjyRQ9GusoWDFlQ/viewform?usp=header">Ładowanie…</iframe>
   </section>
 
-  <footer>
-    <p>© 2025 Martyna | Damian</p>
-  </footer>
-
-  <!-- Przycisk do muzyki -->
-  <button id="playButton">Włącz muzykę</button>
-  <audio id="muzyka" loop>
+  <!-- Muzyka autoplay -->
+  <audio id="muzyka" autoplay loop>
     <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
-     </audio>
+  </audio>
 
   <script>
     // Countdown
@@ -220,15 +190,6 @@
         countdownElement.innerHTML = "To już dziś!";
       }
     }, 1000);
-
-    // Muzyka
-    const playButton = document.getElementById('playButton');
-    const muzyka = document.getElementById('muzyka');
-
-    playButton.addEventListener('click', () => {
-      muzyka.play();
-      playButton.style.display = 'none'; // ukrywa przycisk po uruchomieniu
-    });
   </script>
 </body>
 </html>
