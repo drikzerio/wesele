@@ -14,8 +14,8 @@
   <style>
     body {
       font-family: 'Carattere', cursive;
-      font-size: 20px; /* większy tekst ogólny */
-      line-height: 1.8; /* trochę więcej odstępu */
+      font-size: 20px;
+      line-height: 1.8;
       margin: 0;
       padding: 0;
       background: #fffafc;
@@ -51,12 +51,11 @@
       color: #ff6fa9;
       margin-bottom: 1rem;
       text-align: center;
-      font-size: 2.8rem; /* większe nagłówki */
+      font-size: 2.8rem;
     }
 
-    /* Sekcja "Drodzy!" większy tekst */
     #drodzy p {
-      font-size: 22px; 
+      font-size: 22px;
       line-height: 2;
     }
 
@@ -65,7 +64,7 @@
       border-radius: 12px;
       padding: 1rem;
       text-align: center;
-      font-size: 20px; /* większy tekst w harmonogramie */
+      font-size: 20px;
     }
 
     .mapa {
@@ -97,19 +96,21 @@
 
     #rsvp h2, #rsvp p {
       text-align: center;
-      font-size: 22px; /* większy tekst */
+      font-size: 22px;
     }
 
     .rsvp {
       width: 100%;
       border: none;
       border-radius: 12px;
-      height: 1200px;
+      aspect-ratio: 16/9;
+      max-height: 1200px;
     }
 
     @media (max-width: 768px) {
       .rsvp {
-        height: 1800px;
+        aspect-ratio: auto;
+        height: 1500px;
       }
     }
   </style>
@@ -124,11 +125,8 @@
     <h2>Drodzy!</h2>
     <p>
       Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele Św. Marii Magdaleny w Biłgoraju.<br><br>
-
       Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
-
       Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do xxx.<br><br>
-
       W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami:<br>
       Amelia Grzywaczewska - 663 570 970<br>
       Dominik Kościk - 531 610 069<br>
@@ -149,11 +147,11 @@
     <h2>Mapy dojazdu</h2>
     <div class="mapa">
       <div class="mapa-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10146.510580157!2d22.710916547615184!3d50.52249471435416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10146.510580157!2d22.710916547615184!3d50.52249471435416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <p>Kościół</p>
       </div>
       <div class="mapa-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10187.963025440447!2d23.186543646603322!3d50.32942370426479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10187.963025440447!2d23.186543646603322!3d50.32942370426479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <p>Sala weselna</p>
       </div>
     </div>
@@ -165,8 +163,8 @@
     <iframe class="rsvp" src="https://docs.google.com/forms/d/e/1FAIpQLSf6_4TFXop9vRDwmkQ1h4IN9ItVuW5Xz6FyjyRQ9GusoWDFlQ/viewform?usp=header">Ładowanie…</iframe>
   </section>
 
-  <!-- Muzyka autoplay -->
-  <audio id="muzyka" autoplay loop>
+  <!-- Muzyka -->
+  <audio id="muzyka" loop>
     <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
   </audio>
 
@@ -191,6 +189,22 @@
         countdownElement.innerHTML = "To już dziś!";
       }
     }, 1000);
+
+    // Start muzyki po scrollu lub dotknięciu
+    const muzyka = document.getElementById('muzyka');
+    let muzykaStarted = false;
+
+    function startMuzyka() {
+      if (!muzykaStarted) {
+        muzyka.play().catch(e => console.log("Autoplay zablokowany:", e));
+        muzykaStarted = true;
+        window.removeEventListener('scroll', startMuzyka);
+        window.removeEventListener('touchstart', startMuzyka);
+      }
+    }
+
+    window.addEventListener('scroll', startMuzyka, {passive: true});
+    window.addEventListener('touchstart', startMuzyka);
   </script>
 </body>
 </html>
