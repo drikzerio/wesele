@@ -4,75 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Martyna | Damian</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background: #fffafc;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(135deg, #ff6fa9, #ffb6c1);
-      color: white;
-      text-align: center;
-      padding: 4rem 1rem;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.2rem;
-    }
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
-      text-align: center;
-    }
-    h2 {
-      color: #ff6fa9;
-      margin-bottom: 1rem;
-    }
-    .timeline {
-      background: #ffeef5;
-      border-radius: 12px;
-      padding: 1rem;
-    }
-    iframe {
-    .mapa {
-  width: 100%;
-  min-height: 400px;
-  border: none;
-  border-radius: 12px;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap; 
-}
-      .rsvp {
-  width: 100%;
-  min-height: 1200px; /* tylko formularz jest długi */
-  border: none;
-  border-radius: 12px;
-}
-      }
+ <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #fffafc;
+    color: #333;
+  }
 
-.mapa div {
-  flex: 1 1 400px;
-}
+  header {
+    background: linear-gradient(135deg, #ff6fa9, #ffb6c1);
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+  }
 
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  header p {
+    font-size: 1.2rem;
+  }
+
+  section {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  h2 {
+    color: #ff6fa9;
+    margin-bottom: 1rem;
+  }
+
+  .timeline {
+    background: #ffeef5;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  /* MAPA */
+  .mapa {
+    width: 100%;
+    min-height: 400px;
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .mapa div {
+    flex: 1 1 400px;
+    margin-bottom: 1rem;
+  }
+
+  /* RSVP */
+  .rsvp {
+    width: 100%;
+    min-height: 1800px; /* zwiększona wysokość formularza */
+    border: none;
+    border-radius: 12px;
+  }
+
+  /* RESPONSYWNOŚĆ */
+  @media (min-width: 1200px) {
+    .rsvp {
+      min-height: 2000px; /* jeszcze większa wysokość na dużych ekranach */
     }
-    footer {
-      background: #ff6fa9;
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 3rem;
-    }
-  </style>
+  }
+
+  footer {
+    background: #ff6fa9;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: 3rem;
+  }
+</style>
 </head>
 <body>
   <header>
