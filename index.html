@@ -11,7 +11,7 @@
   <style>
     body {
       font-family: 'Carattere', cursive; /* cała strona w Carattere */
-      font-size: 18px; /* powiększony tekst */
+      font-size: 18px; /* powiększony tekst ogólny */
       line-height: 1.6;
       margin: 0;
       padding: 0;
@@ -47,12 +47,17 @@
     h2 {
       color: #ff6fa9;
       margin-bottom: 1rem;
-      text-align: center; /* wszystkie nagłówki wyśrodkowane */
+      text-align: center;
       font-size: 2.5rem; /* większe nagłówki */
     }
 
     p {
-      font-size: 1.2rem; /* większe paragrafy */
+      font-size: 1.2rem; /* większe paragrafy ogólnie */
+    }
+
+    /* Powiększony i wyśrodkowany tekst w sekcji "Drodzy!" */
+    #drodzy p {
+      font-size: 20px;
     }
 
     .timeline {
@@ -89,8 +94,9 @@
       font-weight: bold;
     }
 
+    /* Wyśrodkowanie nagłówka i opisu RSVP */
     #rsvp h2, #rsvp p {
-      text-align: center; /* wyśrodkowanie nagłówka i opisu RSVP */
+      text-align: center;
     }
 
     .rsvp {
@@ -113,6 +119,23 @@
       padding: 1.5rem 1rem;
       margin-top: 3rem;
     }
+
+    /* Przycisk muzyki */
+    #playButton {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #ff6fa9;
+      color: white;
+      cursor: pointer;
+    }
+
+    #playButton:hover {
+      background: #ffb6c1;
+    }
   </style>
 </head>
 <body>
@@ -121,7 +144,7 @@
     <div id="countdown"></div>
   </header>
 
-  <section id="drodzy!">
+  <section id="drodzy">
     <h2>Drodzy!</h2>
     <p>
       Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele Św. Marii Magdaleny w Biłgoraju.<br><br>
@@ -141,20 +164,20 @@
   <section id="harmonogram">
     <h2>Harmonogram</h2>
     <div class="timeline">
-      <p>⛪ Ceremonia: 14:00 – Kościół Św. Marii Magdaleny</p>
-      <p>🍽️ Wesele: 16:00 – Karczma Pod Szczęśliwym Karpiem</p>
+      <p>Msza Święta: 14:00 – Kościół Św. Marii Magdaleny</p>
+      <p>Przyjęcie weselne: 16:00 – Karczma Pod Szczęśliwym Karpiem</p>
     </div>
   </section>
 
   <section id="mapa">
-    <h2>Mapy dojazdu</h2>
+    <h2>Mapa dojazdu</h2>
     <div class="mapa">
       <div class="mapa-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5073.062494847719!2d22.709312540151284!3d50.524288141133134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757285314614!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=..."></iframe>
         <p>Kościół</p>
       </div>
       <div class="mapa-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7203.860642543343!2d23.186963543398253!3d50.33019609865425!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757285361593!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=..."></iframe>
         <p>Sala weselna</p>
       </div>
     </div>
@@ -166,12 +189,18 @@
     <iframe class="rsvp" src="https://docs.google.com/forms/d/e/1FAIpQLSf6_4TFXop9vRDwmkQ1h4IN9ItVuW5Xz6FyjyRQ9GusoWDFlQ/viewform?usp=header">Ładowanie…</iframe>
   </section>
 
-  <audio autoplay loop>
+  <footer>
+    <p>© 2025 Martyna | Damian</p>
+  </footer>
+
+  <!-- Przycisk do muzyki -->
+  <button id="playButton">Włącz muzykę</button>
+  <audio id="muzyka" loop>
     <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
-    
-  </audio>
+     </audio>
 
   <script>
+    // Countdown
     const weddingDate = new Date('2026-08-07T14:00:00').getTime();
     const countdownElement = document.getElementById('countdown');
 
@@ -191,6 +220,15 @@
         countdownElement.innerHTML = "To już dziś!";
       }
     }, 1000);
+
+    // Muzyka
+    const playButton = document.getElementById('playButton');
+    const muzyka = document.getElementById('muzyka');
+
+    playButton.addEventListener('click', () => {
+      muzyka.play();
+      playButton.style.display = 'none'; // ukrywa przycisk po uruchomieniu
+    });
   </script>
 </body>
 </html>
