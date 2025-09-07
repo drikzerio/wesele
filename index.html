@@ -108,13 +108,13 @@
     width: 100%;
     border: none;
     border-radius: 12px;
-    height: 1200px;
-    animation: pulse 3s infinite;
+    height: 1200px; /* wysokość dla desktop */
+    /* pulsowanie usunięte */
   }
 
   @media (max-width: 768px) {
     .rsvp {
-      height: 1800px;
+      height: 1800px; /* wyższa wysokość na mobile/tablet */
     }
   }
 
@@ -127,12 +127,6 @@
   .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 rgba(255,111,169,0.4); }
-    50% { box-shadow: 0 0 20px rgba(255,111,169,0.6); }
-    100% { box-shadow: 0 0 0 rgba(255,111,169,0.4); }
   }
 
   footer {
