@@ -133,43 +133,43 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
 /* ===== MOBILE ===== */
 @media(max-width:768px){
   body.lock-scroll { overflow:hidden; }
-/* === HEADER MOBILE – FINALNA POPRAWKA === */
 
+  /* === HEADER MOBILE – FINALNA STABILNA WERSJA === */
   header {
-    min-height: auto;          /* usuwa problem 100vh na iOS */
-    height: 75vh;              /* kontrolowana wysokość */
+    min-height: auto;          /* fix iOS 100vh */
+    height: 70vh;              /* trochę niżej, ale treść WYŻEJ */
     padding-bottom: 0;
   }
 
   header::after {
     background: rgba(0,0,0,0.35);
   }
- header h1 {
-    white-space: nowrap;
-    font-size: 2rem;   /* minimalnie mniejsza, żeby się zmieściło */
-  }
 
-  #countdown {
-    margin-top: 0.3rem;
-  }
   header h1,
   #countdown {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
+    white-space: nowrap;
+    text-align: center;
   }
 
+  /* IMIONA – WYŻEJ NA ZDJĘCIU */
   header h1 {
-    bottom: 3.2rem;
-    font-size: 2.1rem;
+    bottom: 5.2rem;            /* <<< KLUCZ: wyżej */
+    font-size: 1.9rem;
   }
 
+  /* LICZNIK – STAŁA SZEROKOŚĆ, NIC NIE SKACZE */
   #countdown {
-    bottom: 1.6rem;
-    font-size: 1.3rem;
+    bottom: 3.4rem;            /* <<< KLUCZ: wyżej */
+    font-size: 1.25rem;
+    width: 260px;              /* blokada rozpychania */
+    line-height: 1.2;
   }
 
+  /* === POZOSTAŁE SEKCJE === */
   h2 { 
     font-size: 2.2rem; 
   }
@@ -191,6 +191,8 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
     height: 200px; 
     top: 65%; 
   }
+}
+
   /* Akapit Drodzy! */
   #drodzy p { text-align:justify; }
 
