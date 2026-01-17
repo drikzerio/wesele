@@ -22,17 +22,26 @@ body {
 }
 
 header {
-  background: linear-gradient(135deg, #c5d3a0, #e6e9d2); /* delikatna oliwka pastelowa */
-  color: #55584a;
+  background: url('header.jpg') center/cover no-repeat;
+  color: #f7f3e8;
   text-align: center;
-  padding: 4rem 1rem;
+  padding: 6rem 1rem;
   position: relative;
   overflow: hidden;
 }
 
-header h1 {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
+  header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+  
+
+header h1 
+  #countdown {
   position: relative;
   z-index: 2;
 }
