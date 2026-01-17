@@ -182,7 +182,6 @@ sections.forEach(s=>observer.observe(s));
 const envelope=document.getElementById('envelopeOverlay');
 const seal=document.getElementById('seal');
 document.body.style.overflow='hidden'; // blokada scrolla
-
 seal.addEventListener('click',()=>{
   envelope.classList.add('open');
   document.body.style.overflow='auto'; // odblokowanie scrolla po kliknięciu
