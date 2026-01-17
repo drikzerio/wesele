@@ -31,7 +31,7 @@ body.lock-scroll {
 .envelope {
   position: fixed;
   inset: 0;
-  background: url('envelope.png') center / cover no-repeat;
+  background: url('koperta.png') center / cover no-repeat;
   z-index: 9999;
 }
 
@@ -46,7 +46,7 @@ body.lock-scroll {
   }
 }
 
-/* ===== SEAL – DESKTOP (DOKŁADNIE JAK CHCIAŁEŚ) ===== */
+/* ===== SEAL – DESKTOP (IDEALNE USTAWIENIE) ===== */
 .seal {
   position: absolute;
   left: 50%;
@@ -67,7 +67,7 @@ body.lock-scroll {
 /* ===== HEADER ===== */
 header {
   min-height: 100vh;
-  background: url('header.jpg') center / cover no-repeat;
+  background: url('naglowek.jpg') center / cover no-repeat;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -96,32 +96,38 @@ header h1 {
   z-index: 1;
   color: #fff;
   margin-top: 1.5rem;
-  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
 }
 
 /* ===== SECTIONS ===== */
 section {
   max-width: 900px;
   margin: 4rem auto;
-  padding: 2rem;
+  padding: 2.5rem;
 }
 
 /* ===== TEXT ===== */
 h2 {
   text-align: center;
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
+  font-size: 3.2rem;
+  margin-bottom: 1.8rem;
 }
 
-p {
-  font-size: 1.4rem;
-  line-height: 2;
+#drodzy p {
+  font-size: 1.65rem;
+  line-height: 2.2;
   text-align: center;
 }
 
-/* ===== TIMELINE ===== */
 .timeline p {
+  font-size: 1.6rem;
   margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.mapa-box p {
+  font-size: 1.7rem;
+  margin-top: 0.8rem;
 }
 
 /* ===== MAPS ===== */
@@ -153,23 +159,35 @@ p {
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
+
+  /* Koperta – bardziej oddalona */
   .seal {
-    width: 150px;
-    height: 150px;
-    top: 62%;
+    width: 160px;
+    height: 160px;
+    top: 68%;
   }
 
   header h1 {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
   }
 
   section {
-    margin: 2rem 1rem;
-    padding: 1.5rem;
+    margin: 2.5rem 1rem;
+    padding: 2rem 1.5rem;
   }
 
-  p {
-    font-size: 1.2rem;
+  #drodzy p {
+    font-size: 1.35rem;
+  }
+
+  .timeline p,
+  .mapa-box p {
+    font-size: 1.35rem;
+  }
+
+  /* RSVP – FIX NA TELEFON */
+  .rsvp-container iframe {
+    height: 1800px;
   }
 }
 </style>
@@ -190,8 +208,7 @@ p {
   <div id="countdown"></div>
 </header>
 
-<!-- CONTENT -->
-<section>
+<section id="drodzy">
   <h2>Drodzy!</h2>
   <p>
     Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00
