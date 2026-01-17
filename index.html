@@ -146,15 +146,18 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
   #countdown { font-size: clamp(1.2rem,3vw,1.6rem); }
 
   h2 { font-size:2.2rem; }
-  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.6rem; line-height:1.9; text-align:justify; }
+  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.6rem; line-height:1.9; }
 
   .envelope { justify-content:flex-start; }
   .seal { width:200px; height:200px; top:65%; }
 
+  /* Akapit Drodzy! */
+  #drodzy p { text-align:justify; }
+
   /* Zdjęcia i mapy mobilnie */
   .zdjecie-box img, .mapa-box iframe { height:300px; }
 
-  /* RSVP */
+  /* Wyśrodkowanie RSVP i węższy panel */
   .rsvp-container { display:flex; justify-content:center; }
   .rsvp-container iframe { max-width:350px; width:90%; margin:0 auto; height:1600px; }
 
@@ -257,7 +260,7 @@ const observer = new IntersectionObserver(entries => {
 },{threshold:0.2});
 sections.forEach(s => observer.observe(s));
 
-// Envelope click
+// Envelope click + muzyka
 const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 const muzyka = document.getElementById('muzyka');
@@ -275,21 +278,23 @@ seal.addEventListener('click', () => {
   muzyka.play().catch(e=>console.log("Autoplay zablokowany", e));
 });
 
-// Pauza muzyki przy opuszczeniu strony
+// Zatrzymanie muzyki przy opuszczeniu strony
 document.addEventListener('visibilitychange', function() {
   if(document.hidden){ muzyka.pause(); } 
 });
 
-// ===== POPRAWNA KOLEJNOŚĆ ZDJĘĆ NA MOBILE =====
+// PRZENIESIENIE ZDJĘCIA KARCZMY POD MAPĘ KOŚCIOŁA na mobile
 function ustawKolejnoscMobile() {
   if(window.innerWidth <= 768){
     const mapaSection = document.getElementById('mapa');
-    const zdjecia = mapaSection.querySelector('.zdjecia-miejsc');
-    const karczmaZdjecie = zdjecia.querySelectorAll('.zdjecie-box')[1]; // drugie zdjęcie - karczma
+    const zdjeciaMiejsc = mapaSection.querySelector('.zdjecia-miejsc');
+    const karczmaZdjecie = zdjeciaMiejsc.querySelectorAll('.zdjecie-box')[1]; // zdjęcie karczmy
     const mapaKosciola = mapaSection.querySelectorAll('.mapa-box')[0]; // mapa kościoła
+    const mapaContainer = mapaSection.querySelector('.mapa');
 
-    // przenieś zdjęcie karczmy tuż po mapie kościoła
-    mapaSection.insertBefore(karczmaZdjecie, mapaKosciola.nextSibling);
+    if(karczmaZdjecie && mapaContainer && mapaKosciola){
+      mapaContainer.insertBefore(karczmaZdjecie, mapaKosciola.nextSibling);
+    }
   }
 }
 window.addEventListener('load', ustawKolejnoscMobile);
