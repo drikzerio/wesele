@@ -27,7 +27,7 @@ body.lock-scroll {
   overflow: hidden;
 }
 
-/* ===== ENVELOPE FULLSCREEN ===== */
+/* ===== ENVELOPE ===== */
 .envelope {
   position: fixed;
   inset: 0;
@@ -36,17 +36,17 @@ body.lock-scroll {
 }
 
 .envelope.open {
-  animation: fadeOut 1s ease forwards;
+  animation: envelopeFade 1s ease forwards;
 }
 
-@keyframes fadeOut {
+@keyframes envelopeFade {
   to {
     opacity: 0;
     visibility: hidden;
   }
 }
 
-/* ===== SEAL ===== */
+/* ===== SEAL – DESKTOP (DOKŁADNIE JAK CHCIAŁEŚ) ===== */
 .seal {
   position: absolute;
   left: 50%;
@@ -87,7 +87,7 @@ header h1 {
   position: relative;
   z-index: 1;
   color: #fff;
-  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-size: clamp(3.8rem, 7vw, 6.5rem);
   white-space: nowrap;
 }
 
@@ -96,7 +96,7 @@ header h1 {
   z-index: 1;
   color: #fff;
   margin-top: 1.5rem;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
 }
 
 /* ===== SECTIONS ===== */
@@ -104,10 +104,9 @@ section {
   max-width: 900px;
   margin: 4rem auto;
   padding: 2rem;
-  background: rgba(255,255,255,0.85);
-  border-radius: 16px;
 }
 
+/* ===== TEXT ===== */
 h2 {
   text-align: center;
   font-size: 3rem;
@@ -121,10 +120,8 @@ p {
 }
 
 /* ===== TIMELINE ===== */
-.timeline {
-  background: rgba(255,255,255,0.9);
-  border-radius: 12px;
-  padding: 2rem;
+.timeline p {
+  margin-bottom: 0.8rem;
 }
 
 /* ===== MAPS ===== */
@@ -142,8 +139,8 @@ p {
 .mapa-box iframe {
   width: 100%;
   height: 350px;
-  border-radius: 12px;
   border: none;
+  border-radius: 12px;
 }
 
 /* ===== RSVP ===== */
@@ -157,13 +154,13 @@ p {
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .seal {
-    width: 110px;
-    height: 110px;
-    top: 60%;
+    width: 150px;
+    height: 150px;
+    top: 62%;
   }
 
   header h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 
   section {
@@ -218,11 +215,11 @@ p {
   <h2>Mapy dojazdu</h2>
   <div class="mapa">
     <div class="mapa-box">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995"></iframe>
       <p>Kościół</p>
     </div>
     <div class="mapa-box">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244"></iframe>
       <p>Sala weselna</p>
     </div>
   </div>
@@ -236,23 +233,21 @@ p {
 </section>
 
 <script>
-/* ===== COUNTDOWN ===== */
+/* COUNTDOWN */
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
 
 setInterval(() => {
   const now = new Date().getTime();
   const diff = weddingDate - now;
-
   const d = Math.floor(diff / (1000*60*60*24));
   const h = Math.floor((diff / (1000*60*60)) % 24);
   const m = Math.floor((diff / (1000*60)) % 60);
   const s = Math.floor((diff / 1000) % 60);
-
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 }, 1000);
 
-/* ===== ENVELOPE CLICK ===== */
+/* ENVELOPE */
 const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 
