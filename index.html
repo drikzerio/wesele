@@ -15,6 +15,7 @@ body {
   color: #000;
   background: url('tlo.png') repeat;
   overflow-x: hidden;
+  position: relative;
 }
 
 body.lock-scroll { overflow:hidden; }
@@ -36,7 +37,7 @@ body.lock-scroll { overflow:hidden; }
 .seal {
   position: absolute;
   left: 50%;
-  top: 60%;
+  top: 60%; /* na komputerze stempel */
   transform: translate(-50%, -50%);
   width: 250px;
   height: 250px;
@@ -51,10 +52,11 @@ header {
   background: url('naglowek.jpg') center / cover no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end; /* przesunięcie w dół */
   align-items: center;
   text-align: center;
   position: relative;
+  padding-bottom: 3rem; /* przesunięcie w dół dla nagłówka i licznika */
 }
 
 header::after {
@@ -67,15 +69,15 @@ header::after {
 header h1 {
   position: relative;
   color: #fff;
-  font-size: 7rem;
+  font-size: 5rem;
   white-space: nowrap;
 }
 
 #countdown {
   position: relative;
   color:#fff;
-  font-size:3.8rem;
-  margin-top: 2rem;
+  font-size:2.8rem;
+  margin-top: 1.5rem;
 }
 
 /* ===== SEKCJE ===== */
@@ -83,13 +85,18 @@ section {
   max-width: 1000px;
   margin: 5rem auto;
   padding: 3rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
-h2 { text-align:center; font-size:5rem; margin-bottom:3rem; }
+section.visible { opacity:1; transform:translateY(0); }
 
-p { font-size:3.2rem; line-height:2.3; text-align:center; }
+h2 { text-align:center; font-size:3.8rem; margin-bottom:2rem; }
 
-.timeline p { font-size:3rem; }
+p { font-size:2.5rem; line-height:2.2; text-align:center; }
+
+.timeline p { font-size:2.5rem; }
 
 /* ===== MAPY ===== */
 .mapa {
@@ -108,7 +115,7 @@ p { font-size:3.2rem; line-height:2.3; text-align:center; }
   border-radius:12px;
 }
 
-.mapa-box p { font-size:3rem; margin-top:1.5rem; }
+.mapa-box p { font-size:2.5rem; margin-top:1.5rem; }
 
 /* ===== RSVP ===== */
 .rsvp-container iframe {
@@ -120,16 +127,17 @@ p { font-size:3.2rem; line-height:2.3; text-align:center; }
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
-  header h1 { font-size:3.4rem; }
-  #countdown { font-size:2.4rem; }
-  h2 { font-size:3.8rem; }
-  p, .timeline p, .mapa-box p { font-size:2.2rem; }
+  header h1 { font-size:3rem; margin-top:3rem; }
+  #countdown { font-size:2rem; margin-top:3rem; }
+  
+  h2 { font-size:2.8rem; }
+  p, .timeline p, .mapa-box p { font-size:1.8rem; }
   section { margin:3rem 1rem; padding:2.5rem 1.8rem; }
   
-  /* Zwiększone oddalenie koperty od góry */
-  .seal { width:190px; height:190px; top:140%; } /* 2x dalej niż wcześniej */
-  .envelope { top:-40%; } /* wyrównanie całej koperty w dół */
-  
+  /* Koperta i stempel mobilnie */
+  .seal { width:180px; height:180px; top:120%; transform: translate(-50%, -50%); }
+  .envelope { top:-20%; }
+
   .rsvp-container iframe { height:2000px; }
 }
 </style>
@@ -212,10 +220,12 @@ setInterval(() => {
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
-// Fade-in sekcji
+// Fade-in sekcji przy scrollowaniu
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
 },{threshold:0.2});
 sections.forEach(s => observer.observe(s));
 
@@ -225,9 +235,9 @@ const seal = document.getElementById('seal');
 const muzyka = document.getElementById('muzyka');
 
 seal.addEventListener('click', () => {
-  envelope.classList.add('open');        // animacja znikania koperty
-  document.body.classList.remove('lock-scroll'); // odblokowanie scrolla
-  muzyka.play().catch(e => console.log("Autoplay zablokowany:", e)); // start muzyki
+  envelope.classList.add('open');
+  document.body.classList.remove('lock-scroll');
+  muzyka.play().catch(e => console.log("Autoplay zablokowany:", e));
 });
 </script>
 
