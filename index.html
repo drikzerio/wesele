@@ -4,35 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Martyna | Damian</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="111.png">
 
 <style>
+/* ===== RESET ===== */
 * { box-sizing: border-box; margin:0; padding:0; }
 
 body {
   font-family: 'Carattere', cursive;
+  background: url('tlo.png') center/cover no-repeat;
   color: #000;
-  background: url('tlo.png') repeat;
   overflow-x: hidden;
+  line-height: 1.6;
   position: relative;
 }
 
-body.lock-scroll { overflow:hidden; }
-
-/* ===== KOPERTA ===== */
+/* ===== ENVELOPE FULLSCREEN ===== */
 .envelope {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
   background: url('koperta.png') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   z-index: 9999;
 }
-
-.envelope.open {
-  animation: fadeOut 1s ease forwards;
-}
-
-@keyframes fadeOut { to { opacity:0; visibility:hidden; } }
 
 .seal {
   position: absolute;
@@ -43,36 +43,45 @@ body.lock-scroll { overflow:hidden; }
   height: 250px;
   cursor: pointer;
   transition: transform .3s ease, opacity .3s ease;
+  z-index: 2;
 }
 
-.seal img { width:100%; height:100%; }
+.seal img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* cień koperty po otwarciu */
+.envelope.open::after {
+  content:'';
+  position: absolute;
+  inset:0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
+  z-index:1;
+}
 
 /* ===== HEADER ===== */
 header {
+  position: relative;
   min-height: 100vh;
-  background: url('naglowek.jpg') center / cover no-repeat;
+  background-image: url('naglowek.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  position: relative;
-  padding-top: 1.5rem; /* połowa wcześniejszego */
-}
-
-header::after {
-  content:'';
-  position:absolute;
-  inset:0;
-  background: rgba(0,0,0,0.45);
-  z-index: 1;
+  padding-top: 30vh; /* przesunięcie headera w dół */
+  z-index: 0;
 }
 
 header h1 {
   position: relative;
   color: #fff;
-  font-size: 5rem;
-  white-space: nowrap;
+  font-size: clamp(4rem, 8vw, 7rem);
   margin-bottom: 1rem;
   z-index: 2;
 }
@@ -80,182 +89,6 @@ header h1 {
 #countdown {
   position: relative;
   color:#fff;
-  font-size:2.8rem;
-  margin-bottom: 1rem;
-  z-index:2;
-}
-
-/* ===== SEKCJE ===== */
-section {
-  max-width: 1000px;
-  margin: 3rem auto; /* zmniejszone z 5rem */
-  padding: 2rem 2rem; /* zmniejszone z 3rem */
-  opacity: 0;
-  transform: translateY(20px); /* delikatniejsze przesunięcie */
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-section.visible { opacity:1; transform:translateY(0); }
-
-h2 {
-  text-align:center;
-  font-size:3.8rem;
-  margin-bottom:1.2rem; /* zmniejszone */
-}
-
-p {
-  font-size:2.5rem;
-  line-height:2;
-  text-align:center;
-  margin-bottom:1rem; /* zmniejszone */
-}
-
-.timeline p { font-size:2.5rem; margin-bottom:1rem; }
-
-/* ===== MAPY ===== */
-.mapa {
-  display:flex;
-  gap:2rem;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.mapa-box { flex:1 1 400px; text-align:center; }
-
-.mapa-box iframe {
-  width:100%;
-  height:400px;
-  border:none;
-  border-radius:12px;
-}
-
-.mapa-box p { font-size:2.5rem; margin-top:1rem; }
-
-/* ===== RSVP ===== */
-.rsvp-container iframe {
-  width:100%;
-  border:none;
-  border-radius:12px;
-  height:1400px;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-  header h1 { font-size:3rem; margin-top:2rem; }
-  #countdown { font-size:2rem; margin-top:1rem; }
-  
-  h2 { font-size:2.8rem; margin-bottom:0.8rem; }
-  p, .timeline p, .mapa-box p { font-size:1.8rem; margin-bottom:0.8rem; }
-  section { margin:2rem 1rem; padding:1.8rem 1.5rem; }
-
-  /* Koperta i stempel mobilnie */
-  .envelope { top:-160%; } /* oddalona dwukrotnie */
-  .seal { width:180px; height:180px; top:50%; transform: translate(-50%, -50%); }
-
-  .rsvp-container iframe { height:2000px; }
-}
-</style>
-</head>
-
-<body class="lock-scroll">
-
-<!-- KOPERTA -->
-<div class="envelope" id="envelope">
-  <div class="seal" id="seal">
-    <img src="seal.png" alt="Seal">
-  </div>
-</div>
-
-<!-- MUZYKA -->
-<audio id="muzyka" loop>
-  <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
-</audio>
-
-<header>
-  <h1>Martyna | Damian</h1>
-  <div id="countdown"></div>
-</header>
-
-<section id="drodzy">
-<h2>Drodzy!</h2>
-<p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św.  Marii Magdaleny w Biłgoraju.<br><br>
-Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
-Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do 31 maja 2026 roku.<br><br>
-W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami.<br>
-Amelia Grzywaczewska - 663 570 970<br>
-Dominik Kościk - 531 610 069<br>
-</p>
-</section>
-
-<section>
-  <h2>Harmonogram</h2>
-  <div class="timeline">
-    <p>14:00 – Msza Święta</p>
-    <p>16:00 – Przyjęcie weselne</p>
-    <p>04:00 – Autokar powrotny</p>
-  </div>
-</section>
-
-<section>
-  <h2>Mapy dojazdu</h2>
-  <div class="mapa">
-    <div class="mapa-box">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <p>Kościół</p>
-    </div>
-    <div class="mapa-box">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <p>Sala weselna</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Potwierdź obecność</h2>
-  <div class="rsvp-container">
-    <iframe
-      src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u&embed=true"
-      allowfullscreen
-      sandbox="allow-scripts allow-same-origin allow-forms">
-    </iframe>
-  </div>
-</section>
-
-<script>
-// Countdown
-const weddingDate = new Date('2026-08-07T14:00:00').getTime();
-const countdown = document.getElementById('countdown');
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = weddingDate - now;
-  const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff / (1000*60*60)) % 24);
-  const m = Math.floor((diff / (1000*60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-  countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
-},1000);
-
-// Fade-in sekcji
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) e.target.classList.add('visible');
-  });
-},{threshold:0.2});
-sections.forEach(s => observer.observe(s));
-
-// Envelope & Seal Click -> usuwa kopertę i startuje muzykę
-const envelope = document.getElementById('envelope');
-const seal = document.getElementById('seal');
-const muzyka = document.getElementById('muzyka');
-
-seal.addEventListener('click', () => {
-  envelope.classList.add('open');
-  document.body.classList.remove('lock-scroll');
-  muzyka.play().catch(e => console.log("Autoplay zablokowany:", e));
-});
-</script>
-
-</body>
-</html>
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 2rem;
+  z-index:2
