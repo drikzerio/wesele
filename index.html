@@ -9,78 +9,69 @@
 <link rel="icon" type="image/png" href="111.png">
 
 <style>
-/* --- Ogólne --- */
+/* ===== RESET & PODSTAWY ===== */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'Carattere', cursive;
-  font-size: 20px;
-  line-height: 1.8;
   margin: 0;
-  padding: 0;
-  background: #fdfaf4; /* jasny beż */
-  color: #55584a; /* ciemniejszy tekst */
+  font-family: 'Carattere', cursive;
+  background: #fdfaf4;
+  color: #55584a;
   overflow-x: hidden;
 }
 
+/* ===== HEADER ===== */
 header {
- background-image: url('header.jpg');
-  background-repeat: no-repeat;
-  background-position: center 30%;
-  background-size: 100%;
-  color: #fdfaf4;
-  text-align: center;
-  padding: 8rem 1rem;
   position: relative;
-  overflow: hidden;
+  min-height: 100vh;
+  background-image: url('header.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
 }
 
-  header::after {
- content: '';
+header::after {
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.55),
-    rgba(0, 0, 0, 0.25)
-  );
+  background: rgba(0,0,0,0.45);
   z-index: 1;
 }
 
-  
-
-header h1 
-  #countdown {
+header h1 {
   position: relative;
   z-index: 2;
+  color: #ffffff;
+  font-size: clamp(4rem, 8vw, 7rem);
+  margin: 0;
+  letter-spacing: 2px;
 }
 
 #countdown {
-  font-size: 2rem;
-  color: #9aa67f; /* oliwkowy akcent */
-  font-weight: bold;
-  margin-top: 1rem;
   position: relative;
   z-index: 2;
+  margin-top: 2rem;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: #ffffff;
+  font-weight: bold;
 }
 
-/* Delikatny parallax */
-header::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('https://images.unsplash.com/photo-1519985176271-adb1088fa94c?fit=crop&w=1400&q=80') center/cover no-repeat;
-  opacity: 0.05;
-  z-index: 1;
-  transform: translateY(0px);
-  transition: transform 0.2s ease-out;
-}
-
+/* ===== SEKCJE ===== */
 section {
   max-width: 900px;
-  margin: 2rem auto;
+  margin: 3rem auto;
   padding: 1rem;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 section.visible {
@@ -89,25 +80,28 @@ section.visible {
 }
 
 h2 {
-  color: #9aa67f; /* nagłówki oliwkowe */
-  margin-bottom: 1rem;
   text-align: center;
-  font-size: 2.8rem;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #9aa67f;
 }
 
 #drodzy p {
-  font-size: 22px;
+  font-size: 1.4rem;
   line-height: 2;
-}
-
-.timeline {
-  background: #f3f4e7; /* bardzo jasna oliwka */
-  border-radius: 12px;
-  padding: 1rem;
   text-align: center;
-  font-size: 20px;
 }
 
+/* ===== HARMONOGRAM ===== */
+.timeline {
+  background: #f3f4e7;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+/* ===== MAPY ===== */
 .mapa {
   display: flex;
   gap: 2rem;
@@ -117,73 +111,50 @@ h2 {
 
 .mapa-box {
   flex: 1 1 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.mapa-box:hover {
-  transform: translateY(-5px);
+  text-align: center;
 }
 
 .mapa-box iframe {
   width: 100%;
-  height: 400px;
+  height: 350px;
   border: none;
   border-radius: 12px;
 }
 
 .mapa-box p {
+  font-size: 1.8rem;
   margin-top: 0.5rem;
-  font-weight: bold;
-  font-size: 28px;
-  text-align: center;
-  color: #55584a;
 }
 
-#rsvp h2 {
-  font-size: 28px;
-  color: #9aa67f;
-  text-align: center;
-}
-
+/* ===== RSVP ===== */
 #rsvp p {
-  font-size: 24px;
   text-align: center;
-  margin-bottom: 1rem;
+  font-size: 1.4rem;
 }
 
-.rsvp-container {
+.rsvp-container iframe {
   width: 100%;
+  border: none;
   border-radius: 12px;
 }
 
-.rsvp {
-  width: 100%;
-  border: none;
-  transition: transform 0.3s ease;
-}
-
-.rsvp-container:hover {
-  transform: translateY(-5px);
-}
-
-/* Mobile adjustments */
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
-  .mapa-box p {
-    font-size: 24px;
+  header {
+    padding: 1rem;
   }
-  #rsvp h2 {
-    font-size: 24px;
+
+  h2 {
+    font-size: 2.4rem;
   }
-  #rsvp p {
-    font-size: 20px;
+
+  #drodzy p {
+    font-size: 1.2rem;
   }
 }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -194,21 +165,18 @@ h2 {
 <section id="drodzy">
 <h2>Drodzy!</h2>
 <p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św.  Marii Magdaleny w Biłgoraju.<br><br>
-Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
-Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do 31 maja 2026 roku.<br><br>
-W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami.<br>
-Amelia Grzywaczewska - 663 570 970<br>
-Dominik Kościk - 531 610 069<br>
+Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju.<br><br>
+Po Mszy Świętej zapraszamy na przyjęcie weselne w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
+Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 </p>
 </section>
 
 <section id="harmonogram">
 <h2>Harmonogram</h2>
 <div class="timeline">
-<p>Msza Święta 14:00 – Kościół pw. św. Marii Magdaleny</p>
-<p>Przyjęcie weselne 16:00 – Karczma Pod Szczęśliwym Karpiem</p>
-  <p> Autokar powrotny do Biłgoraja 4:00 - chęć powrotu autokarem prosimy potwierdzić w RSVP</p>
+<p>14:00 – Msza Święta</p>
+<p>16:00 – Przyjęcie weselne</p>
+<p>04:00 – Autokar powrotny</p>
 </div>
 </section>
 
@@ -216,85 +184,45 @@ Dominik Kościk - 531 610 069<br>
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10146.510580157!2d22.710916547615184!3d50.52249471435416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10187.963025440447!2d23.186543646603322!3d50.32942370426479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
 </section>
 
 <section id="rsvp">
-<h2>Potwierdź swoją obecność</h2>
-<p>Prosimy o wypełnienie poniższego formularza, abyśmy mogli przygotować się na wspólne świętowanie.</p>
+<h2>Potwierdź obecność</h2>
+<p>Wypełnij formularz poniżej</p>
 <div class="rsvp-container">
-  <iframe class="rsvp" id="rsvpForm" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
+  <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u" style="height:1400px"></iframe>
 </div>
 </section>
 
-<audio id="muzyka" loop>
-  <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
-</audio>
-
 <script>
-// --- Countdown flip-style ---
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
-const countdownElement = document.getElementById('countdown');
+const countdown = document.getElementById('countdown');
 
-function updateCountdown() {
+setInterval(() => {
   const now = new Date().getTime();
-  const distance = weddingDate - now;
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  countdownElement.innerHTML = `<span>${days}</span> dni <span>${hours}</span> godzin <span>${minutes}</span> minut <span>${seconds}</span> sekund`;
-  if(distance < 0) {
-    countdownElement.innerHTML = "To już dziś!";
-    clearInterval(countdownInterval);
-  }
-}
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
+  const diff = weddingDate - now;
+  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const m = Math.floor((diff / (1000 * 60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+  countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
+}, 1000);
 
-// --- Muzyka start ---
-const muzyka = document.getElementById('muzyka');
-let muzykaStarted = false;
-function startMuzyka() {
-  if(!muzykaStarted){
-    muzyka.play().catch(e => console.log("Autoplay zablokowany:", e));
-    muzykaStarted = true;
-  }
-}
-document.addEventListener('click', startMuzyka, {once:true});
-document.addEventListener('scroll', startMuzyka, {once:true, passive:true});
-document.addEventListener('touchstart', startMuzyka, {once:true});
-
-// --- Fade-in sekcji ---
+// fade-in
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
-  });
-},{threshold: 0.2});
-sections.forEach(section => observer.observe(section));
-
-// --- Dynamic RSVP height ---
-function adjustRSVP() {
-  const iframe = document.getElementById('rsvpForm');
-  const width = window.innerWidth;
-  if(width <= 768){
-    iframe.style.height = '1500px';
-  } else {
-    iframe.style.height = '1200px';
-  }
-}
-window.addEventListener('load', adjustRSVP);
-window.addEventListener('resize', adjustRSVP);
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+},{threshold:0.2});
+sections.forEach(s => observer.observe(s));
 </script>
+
 </body>
 </html>
