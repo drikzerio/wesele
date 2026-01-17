@@ -9,16 +9,12 @@
 <link rel="icon" type="image/png" href="111.png">
 
 <style>
-/* ===== RESET & PODSTAWY ===== */
-* {
-  box-sizing: border-box;
-  margin:0;
-  padding:0;
-}
+* { box-sizing: border-box; margin:0; padding:0; }
+
 body {
   font-family: 'Carattere', cursive;
   background: #fdfaf4;
-  color: #000000;
+  color: #000;
   overflow-x: hidden;
 }
 
@@ -26,7 +22,7 @@ body {
 #envelopeOverlay{
   position:fixed;
   inset:0;
-  background:url('envelope.png') center/cover no-repeat;
+  background:url('77876d26-6e32-4897-92af-d7b297cd02d0.png') center/cover no-repeat;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -36,22 +32,14 @@ body {
 
 #seal{
   position:absolute;
-  bottom:18%;
-  left:48%;
-  width:150px;
-  height:150px;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  height:180px;
   cursor:pointer;
   z-index:10000;
   transition: transform 0.6s ease;
-}
-
-@media(max-width:768px){
-  #seal{
-    width:110px;
-    height:110px;
-    bottom:16%;
-    left:48%;
-  }
 }
 
 /* ===== HEADER ===== */
@@ -115,7 +103,7 @@ h2{
   text-align:center;
   font-size:3rem;
   margin-bottom:1rem;
-  color:#333333; /* zmienione na czarny pasujący do kolorystyki */
+  color:#333333;
 }
 
 #drodzy p, .timeline p, .mapa-box p, #rsvp p{
@@ -178,6 +166,7 @@ h2{
   h2{font-size:2.4rem;}
   #drodzy p{font-size:1.2rem;}
   .mapa-box p{font-size:1.5rem;}
+  #seal{width:130px; height:130px;}
 }
 </style>
 </head>
@@ -259,7 +248,10 @@ const envelopeOverlay = document.getElementById('envelopeOverlay');
 const seal = document.getElementById('seal');
 document.body.style.overflow = "hidden"; // blokada scrolla
 seal.addEventListener('click',()=>{
-  seal.style.transform = "scale(1.3) rotate(10deg)";
+  // efekt "przełamania" stempla
+  seal.style.transform = "translateX(-50%) scale(1.3) rotate(10deg)";
+  seal.style.filter = "drop-shadow(0 10px 15px rgba(0,0,0,0.4))";
+  
   setTimeout(()=>{
     envelopeOverlay.style.opacity = 0;
     envelopeOverlay.style.transform = "scale(1.05)";
