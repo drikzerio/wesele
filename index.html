@@ -20,6 +20,9 @@ body {
   position: relative;
 }
 
+/* ===== BLOKADA SCROLLU ===== */
+body.lock-scroll { overflow: hidden; }
+
 /* ===== ENVELOPE FULLSCREEN ===== */
 .envelope {
   position: fixed;
@@ -35,13 +38,14 @@ body {
   transition: opacity 0.6s ease;
 }
 
+/* STAMP - idealnie na środku zamknięcia koperty */
 .seal {
   position: absolute;
-  bottom: 35%; /* miejsce złożenia koperty */
-  width: 150px;
-  height: 150px;
+  top: 57%;       /* dokładna wysokość stempla względem koperty */
   left: 50%;
-  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  transform: translate(-50%, -50%);
   z-index: 2;
   transition: transform 0.4s ease, opacity 0.4s ease;
 }
@@ -52,20 +56,26 @@ body {
   object-fit: contain;
 }
 
-/* cień po otwarciu */
-.envelope.open::after {
-  content:'';
-  position: absolute;
-  inset:0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
-  z-index:1;
-}
-
 /* Animacja stempla */
 @keyframes crack {
-  0%   { transform: translateX(-50%) scale(1); }
-  50%  { transform: translateX(-50%) scale(1.1) rotate(6deg); }
-  100% { transform: translateX(-50%) scale(0); opacity:0; }
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -50%) scale(1.1) rotate(6deg); }
+  100% { transform: translate(-50%, -50%) scale(0); opacity:0; }
+}
+
+/* Koperta po otwarciu */
+.envelope.open {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cień pojawiający się po otwarciu */
+.envelope.open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
+  z-index: 1;
 }
 
 /* ===== HEADER ===== */
@@ -126,7 +136,7 @@ h2 {
   text-align:center;
   font-size:3rem;
   margin-bottom:1rem;
-  color:#000;
+  color:#333; /* ciemniejszy, czytelny */
 }
 
 #drodzy p, .timeline p, .mapa-box p, #rsvp p {
@@ -177,9 +187,6 @@ h2 {
   h2{font-size:2.4rem;}
   #drodzy p, .timeline p, .mapa-box p, #rsvp p{font-size:1.2rem;}
 }
-
-/* Blokada scrollowania przed otwarciem koperty */
-body.lock-scroll{overflow:hidden;}
 </style>
 </head>
 
@@ -221,11 +228,11 @@ Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
@@ -265,16 +272,11 @@ const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 
 seal.addEventListener('click', () => {
-  // Animacja stempla
   seal.style.animation = 'crack 0.35s forwards';
-  // Dodaj klasę open (cień)
   envelope.classList.add('open');
-  // Po zakończeniu animacji stempla ukryj całą kopertę
-  setTimeout(() => {
-    envelope.style.display = 'none';
-    document.body.classList.remove('lock-scroll');
-  }, 350); // czas animacji stempla
+  document.body.classList.remove('lock-scroll');
 });
 </script>
+
 </body>
 </html>
