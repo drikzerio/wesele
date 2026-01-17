@@ -16,7 +16,6 @@ body {
   background: url('tlo.png') center/cover no-repeat;
   color: #000;
   overflow-x: hidden;
-  line-height: 1.6;
   position: relative;
 }
 
@@ -26,12 +25,18 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: url('koperta.png') center/cover no-repeat;
+  background: url('koperta') center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 9999;
+  transition: opacity 0.6s ease;
+}
+
+.envelope.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .seal {
@@ -43,7 +48,6 @@ body {
   height: 250px;
   cursor: pointer;
   transition: transform .3s ease, opacity .3s ease;
-  z-index: 2;
 }
 
 .seal img {
@@ -52,46 +56,46 @@ body {
   object-fit: contain;
 }
 
-/* cień koperty po otwarciu */
-.envelope.open::after {
-  content:'';
-  position: absolute;
-  inset:0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
-  z-index:1;
-}
-
 /* ===== HEADER ===== */
 header {
   position: relative;
   min-height: 100vh;
-  background-image: url('naglowek.jpg');
+  background-image: url('naglowek');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
-  padding-top: 30vh; /* przesunięcie headera w dół */
-  z-index: 0;
+  padding: 2rem;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1;
 }
 
 header h1 {
   position: relative;
-  color: #fff;
-  font-size: clamp(4rem, 8vw, 7rem);
-  margin-bottom: 1rem;
   z-index: 2;
+  color: #ffffff;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
 }
 
 #countdown {
   position: relative;
-  color:#fff;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  margin-bottom: 2rem;
-  z-index:2;
+  z-index: 2;
+  margin-bottom: 3rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: #ffffff;
+  font-weight: bold;
 }
 
 /* ===== SEKCJE ===== */
@@ -99,6 +103,8 @@ section {
   max-width: 900px;
   margin: 2rem auto;
   padding: 1rem;
+  background: url('tlo.png') center/cover no-repeat;
+  border-radius: 8px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease, transform 1s ease;
@@ -108,17 +114,17 @@ section.visible { opacity:1; transform:translateY(0); }
 
 h2 {
   text-align:center;
-  font-size:2.8rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
   color:#000;
 }
 
 #drodzy p, .timeline p, .mapa-box p, #rsvp p {
-  font-size:1.8rem; /* większe opisy */
-  line-height:1.8;
+  font-size: 1.8rem;
+  line-height: 1.8;
   text-align:center;
   color:#000;
-  margin-bottom:1rem; /* mniejsze odstępy między akapitami */
+  margin-bottom: 1rem;
 }
 
 /* Harmonogram */
@@ -128,7 +134,7 @@ h2 {
   padding:2rem;
 }
 
-/* Mapy obok siebie */
+/* Mapy */
 .mapa {
   display:flex;
   gap:2rem;
@@ -143,9 +149,14 @@ h2 {
 
 .mapa-box iframe {
   width:100%;
-  height:350px;
+  height:400px;
   border:none;
   border-radius:12px;
+}
+
+.mapa-box p {
+  font-size:1.8rem;
+  margin-top:0.5rem;
 }
 
 /* RSVP */
@@ -153,25 +164,22 @@ h2 {
   width:100%;
   border:none;
   border-radius:12px;
-  height:1400px;
 }
 
 /* Mobile */
 @media(max-width:768px){
-  header{padding-top:60vh;} /* koperta bardziej oddalona */
-  header h1 { font-size:4rem; margin-bottom:0.5rem; }
-  #countdown { font-size:2rem; margin-bottom:1rem; }
-
-  #drodzy p, .timeline p, .mapa-box p, #rsvp p{font-size:1.4rem;}
-  .rsvp-container iframe {height:1200px;}
-}
-body.lock-scroll{overflow:hidden;} /* blokada scrolla przed otwarciem koperty */
-
-/* Animacja stempla */
-@keyframes crack {
-  0%   { transform: translate(-50%, -50%) scale(1); }
-  50%  { transform: translate(-50%, -50%) scale(1.1) rotate(6deg); }
-  100% { transform: translate(-50%, -50%) scale(0); opacity:0; }
+  header h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  #countdown {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    margin-bottom: 2rem;
+  }
+  section { margin: 1rem; }
+  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.4rem; }
+  .envelope { padding-top: 10%; }
+  .seal { width: 180px; height:180px; top:65%; }
+  .rsvp-container iframe { height:1200px; }
 }
 </style>
 </head>
@@ -195,7 +203,7 @@ body.lock-scroll{overflow:hidden;} /* blokada scrolla przed otwarciem koperty */
 <section id="drodzy">
 <h2>Drodzy!</h2>
 <p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św.  Marii Magdaleny w Biłgoraju.<br><br>
+Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju.<br><br>
 Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
 Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do 31 maja 2026 roku.<br><br>
 W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami.<br>
@@ -217,11 +225,11 @@ Dominik Kościk - 531 610 069<br>
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
@@ -240,7 +248,7 @@ Dominik Kościk - 531 610 069<br>
 </audio>
 
 <script>
-// Countdown
+// ===== Countdown =====
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
 setInterval(() => {
@@ -253,25 +261,34 @@ setInterval(() => {
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
-// Fade-in sekcji
+// ===== Fade-in sekcji =====
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
 },{threshold:0.2});
 sections.forEach(s => observer.observe(s));
 
-// Envelope click
+// ===== Envelope / Seal =====
 const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 const muzyka = document.getElementById('muzyka');
 
 seal.addEventListener('click', () => {
-  envelope.classList.add('open');
   seal.style.animation = 'crack 0.35s forwards';
+  envelope.classList.add('hidden'); // koperta znika
   document.body.classList.remove('lock-scroll');
-  muzyka.play().catch(e=>console.log("Autoplay zablokowany:", e));
+  muzyka.play().catch(e => console.log("Autoplay zablokowany:", e));
 });
-</script>
 
+// ===== Stempel animacja =====
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes crack {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -50%) scale(1.1) rotate(6deg); }
+  100% { transform: translate(-50%, -50%) scale(0); opacity:0; }
+}`;
+document.head.appendChild(style);
+</script>
 </body>
 </html>
