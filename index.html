@@ -11,7 +11,7 @@
 /* ===== RESET ===== */
 * { box-sizing: border-box; margin:0; padding:0; }
 
-/* ===== BODY I TŁO ===== */
+/* ===== BODY I JEDNOLITE TŁO ===== */
 body {
   font-family: 'Carattere', cursive;
   background: url('tlo.png') center/cover no-repeat;
@@ -37,7 +37,7 @@ body {
 .seal {
   position: absolute;
   left: 50%;
-  top: 60%; /* idealne miejsce dla stempla */
+  top: 60%;
   transform: translate(-50%, -50%);
   width: 250px;
   height: 250px;
@@ -52,7 +52,7 @@ body {
 }
 
 .envelope.open {
-  display: none; /* koperta znika po kliknięciu */
+  display: none;
 }
 
 /* ===== HEADER ===== */
@@ -62,7 +62,7 @@ header {
   background: url('naglowek.jpg') center/cover no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* obniżenie nagłówka */
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
   padding: 2rem;
@@ -72,7 +72,7 @@ header h1 {
   position: relative;
   color: #fff;
   font-size: clamp(4rem, 8vw, 7rem);
-  margin-bottom: 1rem; /* odległość od licznika */
+  margin-bottom: 1rem;
 }
 
 #countdown {
@@ -85,11 +85,12 @@ header h1 {
 /* ===== SEKCJE ===== */
 section {
   max-width: 900px;
-  margin: 1.5rem auto; /* mniejsze odstępy między akapitami */
+  margin: 1.5rem auto;
   padding: 1rem;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
+  background: url('tlo.png') center/cover no-repeat; /* jednolite tło dla wszystkich sekcji */
 }
 
 section.visible { opacity:1; transform:translateY(0); }
@@ -102,7 +103,7 @@ h2 {
 }
 
 p {
-  font-size:1.6rem; /* większe opisy */
+  font-size:1.6rem;
   line-height:1.8;
   text-align:center;
   margin-bottom:1rem;
@@ -150,18 +151,16 @@ p {
   width:100%;
   border:none;
   border-radius:12px;
-  height:2000px; /* całe pytania od razu widać na telefonie */
+  height:2000px; /* całość formularza od razu widać */
 }
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
-  header h1 {
-    font-size:5vw; /* trochę mniejszy na telefonie */
-  }
+  header h1 { font-size:5vw; }
   #countdown { font-size:3vw; }
   .seal { width:200px; height:200px; top:80%; } /* koperta bardziej oddalona */
   .mapa-box iframe { height:300px; }
-  .rsvp-container iframe { height:2200px; } /* większa wysokość dla telefonu */
+  .rsvp-container iframe { height:2200px; }
   p { font-size:1.4rem; line-height:1.6; }
   section { margin:1rem auto; padding:0.8rem; }
 }
@@ -258,7 +257,7 @@ const muzyka = document.getElementById('muzyka');
 
 seal.addEventListener('click', () => {
   envelope.classList.add('open'); // koperta znika
-  seal.style.opacity = 0; 
+  seal.style.opacity = 0;
   document.body.classList.remove('lock-scroll');
   muzyka.play().catch(e=>console.log("Autoplay zablokowany:",e));
 });
