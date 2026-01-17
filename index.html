@@ -132,8 +132,9 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
+  body.lock-scroll { overflow:hidden; }
 
-  /* --- Header mobile --- */
+  /* Header mobile */
   header {
     justify-content: center;
     padding-bottom:0;
@@ -144,33 +145,33 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
   header h1 { font-size: clamp(2.2rem,5vw,2.8rem); }
   #countdown { font-size: clamp(1.2rem,3vw,1.6rem); }
 
-  /* --- Teksty i nagłówki --- */
   h2 { font-size:2.2rem; }
   #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.6rem; line-height:1.9; }
-  #drodzy p { text-align:justify; }
 
-  /* --- Envelope mobile --- */
   .envelope { justify-content:flex-start; }
   .seal { width:200px; height:200px; top:65%; }
 
-  /* --- Kolejność zdjęć i map tylko na telefon --- */
-  /* Oddzielona logika mobile: */
+  /* Kolejność zdjęć i map na mobile - poprawiona */
   #mapa .zdjecia-miejsc { display:flex; flex-direction:column; gap:1rem; }
-  #mapa .zdjecie-box:nth-child(1) { order:1; }  /* kosciol */
-  #mapa .mapa-box:nth-child(1) { order:2; }      /* mapa kosciola */
-  #mapa .mapa-box:nth-child(1) p { order:3; }    /* podpis kosciola */
-  #mapa .zdjecie-box:nth-child(2) { order:4; }  /* karczma */
-  #mapa .mapa-box:nth-child(2) { order:5; }      /* mapa karczmy */
-  #mapa .mapa-box:nth-child(2) p { order:6; }    /* podpis karczmy */
+  #mapa .zdjecie-box:nth-child(1) { order:1; } /* Zdjęcie kościoła */
+  #mapa .mapa-box:nth-child(1) { order:2; }     /* Mapa kościoła */
+  #mapa .mapa-box:nth-child(1) p { order:3; }   /* Podpis kościoła */
+  #mapa .zdjecie-box:nth-child(2) { order:4; } /* Zdjęcie karczmy po mapie kościoła */
+  #mapa .mapa-box:nth-child(2) { order:5; }     /* Mapa karczmy */
+  #mapa .mapa-box:nth-child(2) p { order:6; }   /* Podpis karczmy */
 
+  /* Wysokość mobilna */
   .zdjecie-box img, .mapa-box iframe { height:300px; }
 
   /* RSVP */
   .rsvp-container { display:flex; justify-content:center; }
   .rsvp-container iframe { max-width:350px; width:90%; margin:0 auto; height:1600px; }
 
-  /* Linki świadków czarne */
+  /* Linki świadków */
   a { color:#000; text-decoration:none; -webkit-tap-highlight-color: transparent; }
+
+  /* Akapit Drodzy! */
+  #drodzy p { text-align:justify; }
 }
 </style>
 </head>
@@ -192,12 +193,12 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
 <h2>Drodzy!</h2>
 <p>
 Uroczystość zaślubin odbędzie się <strong>7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju</strong>. 
-Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się 
-w <strong>Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej</strong>. 
-Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do <strong>31 maja 2026 roku</strong>. 
-W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami:
-<a href="tel:663570970"><strong>Amelia Grzywaczewska - 663 570 970</strong></a>
-<a href="tel:531610069"><strong>Dominik Kościk - 531 610 069</strong></a>
+<br>Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się 
+<br> w <strong>Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej</strong>. 
+<br> Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do <br> <strong>31 maja 2026 roku</strong>. 
+<br> W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami:
+<br> <a href="tel:663570970"><strong>Amelia Grzywaczewska - 663 570 970</strong></a> 
+<br> <a href="tel:531610069"><strong>Dominik Kościk - 531 610 069</strong></a>
 </p>
 </section>
 
