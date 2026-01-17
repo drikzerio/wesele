@@ -19,45 +19,47 @@ body {
   overflow-x: hidden;
   position: relative;
 }
+body.lock-scroll { overflow:hidden; }
 
-/* ===== ENVELOPE FULLSCREEN ===== */
+/* ===== ENVELOPE ===== */
 .envelope {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  background: url('envelope.png') center/cover no-repeat;
+  background: url('envelope-green.png') center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 9999;
 }
-
 .seal {
   position: absolute;
-  bottom: 20%; /* dokładnie w miejscu złożenia koperty */
-  width: 120px;
-  height: 120px;
-  transform: translateX(-50%);
+  bottom: 35%; /* ustawione dokładnie nad miejscem złożenia */
   left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
   z-index: 2;
   transition: transform 0.4s ease, opacity 0.4s ease;
 }
+.seal img { width: 100%; height: 100%; object-fit: contain; }
 
-.seal img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* cień po otwarciu */
+/* cień pojawia się po kliknięciu */
 .envelope.open::after {
   content:'';
   position: absolute;
   inset:0;
   background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
   z-index:1;
+}
+
+/* Animacja stempla */
+@keyframes crack {
+  0%   { transform: translateX(-50%) scale(1); opacity:1; }
+  50%  { transform: translateX(-50%) scale(1.1) rotate(6deg); opacity:1; }
+  100% { transform: translateX(-50%) scale(0); opacity:0; }
 }
 
 /* ===== HEADER ===== */
@@ -75,7 +77,6 @@ header {
   text-align: center;
   padding: 2rem;
 }
-
 header::after {
   content: '';
   position: absolute;
@@ -83,7 +84,6 @@ header::after {
   background: rgba(0,0,0,0.45);
   z-index: 1;
 }
-
 header h1 {
   position: relative;
   z-index: 2;
@@ -92,7 +92,6 @@ header h1 {
   margin: 0;
   letter-spacing: 2px;
 }
-
 #countdown {
   position: relative;
   z-index: 2;
@@ -111,67 +110,23 @@ section {
   transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
 }
-
 section.visible { opacity:1; transform:translateY(0); }
 
-h2 {
-  text-align:center;
-  font-size:3rem;
-  margin-bottom:1rem;
-  color:#000;
-}
+h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
+#drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.4rem; line-height:2; text-align:center; color:#000; }
 
-#drodzy p, .timeline p, .mapa-box p, #rsvp p {
-  font-size:1.4rem;
-  line-height:2;
-  text-align:center;
-  color:#000;
-}
+.timeline { background:#f8f5f0; border-radius:12px; padding:2rem; }
+.mapa { display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; }
+.mapa-box { flex:1 1 400px; text-align:center; }
+.mapa-box iframe { width:100%; height:350px; border:none; border-radius:12px; }
+.rsvp-container iframe { width:100%; border:none; border-radius:12px; height:1400px; }
 
-/* Harmonogram */
-.timeline {
-  background:#f8f5f0;
-  border-radius:12px;
-  padding:2rem;
-}
-
-/* Mapy */
-.mapa {
-  display:flex;
-  gap:2rem;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.mapa-box {
-  flex:1 1 400px;
-  text-align:center;
-}
-
-.mapa-box iframe {
-  width:100%;
-  height:350px;
-  border:none;
-  border-radius:12px;
-}
-
-/* RSVP */
-.rsvp-container iframe {
-  width:100%;
-  border:none;
-  border-radius:12px;
-  height:1400px;
-}
-
-/* Mobile */
+/* MOBILE */
 @media(max-width:768px){
   header{padding:1rem;}
   h2{font-size:2.4rem;}
   #drodzy p, .timeline p, .mapa-box p, #rsvp p{font-size:1.2rem;}
 }
-
-/* Blokada scrollowania przed otwarciem koperty */
-body.lock-scroll{overflow:hidden;}
 </style>
 </head>
 
@@ -213,11 +168,11 @@ Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
@@ -257,15 +212,9 @@ const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 seal.addEventListener('click', () => {
   envelope.classList.add('open');
-  seal.style.animation = 'crack 0.35s forwards';
+  seal.style.animation = 'crack 0.4s forwards';
   document.body.classList.remove('lock-scroll');
 });
-
-@keyframes crack {
-  0%   { transform: translateX(-50%) scale(1); }
-  50%  { transform: translateX(-50%) scale(1.1) rotate(6deg); }
-  100% { transform: translateX(-50%) scale(0); opacity:0; }
-}
 </script>
 </body>
 </html>
