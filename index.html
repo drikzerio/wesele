@@ -8,9 +8,7 @@
 <link rel="icon" type="image/png" href="111.png">
 
 <style>
-/* ===== RESET ===== */
 * { box-sizing: border-box; margin:0; padding:0; }
-
 a { color: inherit; text-decoration: none; }
 
 body {
@@ -22,7 +20,7 @@ body {
 }
 body.lock-scroll { overflow: hidden; height: 100vh; }
 
-/* ===== ENVELOPE FULLSCREEN ===== */
+/* Envelope */
 .envelope {
   position: fixed;
   inset: 0;
@@ -36,7 +34,6 @@ body.lock-scroll { overflow: hidden; height: 100vh; }
   z-index: 9999;
   transition: opacity 0.5s ease;
 }
-
 .seal {
   position: absolute;
   left: 50%;
@@ -47,14 +44,9 @@ body.lock-scroll { overflow: hidden; height: 100vh; }
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+.seal img { width:100%; height:100%; object-fit:contain; }
 
-.seal img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* ===== HEADER ===== */
+/* Header */
 header {
   position: relative;
   min-height: 100vh;
@@ -64,20 +56,18 @@ header {
   background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* desktop pozostaje na dole */
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
-  padding-bottom: 5rem; /* desktop */
+  padding-bottom: 5rem;
 }
-
 header::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45); /* desktop wyszarzenie */
+  background: rgba(0,0,0,0.45);
   z-index: 1;
 }
-
 header h1 {
   position: relative;
   z-index: 2;
@@ -86,7 +76,6 @@ header h1 {
   margin: 0;
   letter-spacing: 2px;
 }
-
 #countdown {
   position: relative;
   z-index: 2;
@@ -96,7 +85,7 @@ header h1 {
   font-weight: bold;
 }
 
-/* ===== SEKCJE ===== */
+/* Sections */
 section {
   max-width: 900px;
   margin: 2rem auto;
@@ -105,90 +94,37 @@ section {
   transform: translateY(20px);
   transition: opacity 1s ease, transform 1s ease;
 }
-
 section.visible { opacity:1; transform:translateY(0); }
 
-h2 {
-  text-align:center;
-  font-size:3rem;
-  margin-bottom:1rem;
-  color:#000;
-}
+h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
 
-#drodzy p, .timeline p, .mapa-box p, #rsvp p {
-  font-size:2rem;
-  line-height:2.2;
-  text-align:center;
-  color:#000;
-  margin-bottom:1rem;
-}
+#drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:2rem; line-height:2.2; text-align:center; color:#000; margin-bottom:1rem; }
 
-.timeline {
-  background:url('tlo.png') repeat;
-  border-radius:12px;
-  padding:2rem;
-}
+.timeline { background:url('tlo.png') repeat; border-radius:12px; padding:2rem; }
 
-.mapa {
-  display:flex;
-  gap:2rem;
-  flex-wrap: wrap;
-  justify-content:center;
-}
+.mapa { display:flex; gap:2rem; flex-wrap: wrap; justify-content:center; }
+.mapa-box { flex:1 1 400px; text-align:center; }
+.mapa-box iframe { width:100%; height:450px; border:none; border-radius:12px; }
 
-.mapa-box {
-  flex:1 1 400px;
-  text-align:center;
-}
+.zdjecia-miejsc { display:flex; gap:2rem; flex-wrap: wrap; justify-content:center; margin-bottom:2rem; }
+.zdjecie-box { flex:1 1 400px; text-align:center; }
+.zdjecie-box img { width:100%; height:450px; object-fit:cover; border-radius:12px; }
 
-.mapa-box iframe {
-  width:100%;
-  height:450px;
-  border:none;
-  border-radius:12px;
-}
-
-.zdjecia-miejsc {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.zdjecie-box {
-  flex: 1 1 400px;
-  text-align: center;
-}
-
-.zdjecie-box img {
-  width: 100%;
-  height: 450px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.rsvp-container {
-  width: 100%;
-}
-.rsvp-container iframe {
-  width:100%;
-  border:none;
-  border-radius:12px;
-  height:2000px;
-}
+.rsvp-container { width:100%; }
+.rsvp-container iframe { width:100%; border:none; border-radius:12px; height:2000px; }
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
   body.lock-scroll { overflow:hidden; }
 
+  /* header mobilny */
   header {
-    justify-content: center; /* napis + licznik na środku */
-    padding-bottom: 2rem;
-    background-size: 120% auto; /* zoom zdjęcia */
+    justify-content: center;
+    padding-bottom:2rem;
+    background-size: 120% auto; /* zoom na mobile */
     background-position: center top;
   }
-  header::after { background: rgba(0,0,0,0); } /* brak wyszarzenia na mobile */
+  header::after { background: rgba(0,0,0,0); }
   header h1 { font-size: clamp(2.5rem,5vw,3rem); }
   #countdown { font-size: clamp(1.2rem,3vw,1.8rem); }
 
@@ -198,18 +134,18 @@ h2 {
   .envelope { justify-content:flex-start; }
   .seal { width:200px; height:200px; top:65%; }
 
-  /* Mobile: kolejność zdjęć i map */
-  #mapa .zdjecie-box:nth-child(1) { order: 1; } /* kościół */
-  #mapa .mapa-box:nth-child(1) { order: 2; } /* mapa kościoła */
-  #mapa .zdjecie-box:nth-child(2) { order: 3; } /* sala */
-  #mapa .mapa-box:nth-child(2) { order: 4; } /* mapa sali */
+  /* mobile: kolejność zdjęć i mapy */
+  #mapa .zdjecie-box:nth-child(1) { order:1; } /* kosciol */
+  #mapa .mapa-box:nth-child(1) { order:2; } /* mapa kosciola */
+  #mapa .zdjecie-box:nth-child(2) { order:3; } /* karczma */
+  #mapa .mapa-box:nth-child(2) { order:4; } /* mapa karczmy */
 
-  .zdjecie-box img, .mapa-box iframe { height: 300px; }
+  .zdjecie-box img, .mapa-box iframe { height:300px; }
 
-  .rsvp-container { display: flex; justify-content: center; }
-  .rsvp-container iframe { max-width: 350px; width: 90%; margin: 0 auto; height: 1600px; }
+  .rsvp-container { display:flex; justify-content:center; }
+  .rsvp-container iframe { max-width:350px; width:90%; margin:0 auto; height:1600px; }
 
-  a { -webkit-tap-highlight-color: transparent; }
+  a { -webkit-tap-highlight-color: transparent; color:#000; }
 }
 </style>
 </head>
@@ -253,10 +189,10 @@ W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z nas
 
 <div class="zdjecia-miejsc">
   <div class="zdjecie-box">
-    <img src="kosciol.jpg" alt="Kościół" style="object-fit: contain;" />
+    <img src="kosciol.jpg" alt="Kościół" style="object-fit:contain;">
   </div>
   <div class="zdjecie-box">
-    <img src="karczma1.jpg" alt="Karczma" />
+    <img src="karczma1.jpg" alt="Karczma">
   </div>
 </div>
 
@@ -321,11 +257,7 @@ seal.addEventListener('click', () => {
 });
 
 document.addEventListener('visibilitychange', function() {
-  if (document.hidden) {
-    muzyka.pause();
-  } else {
-    muzyka.play().catch(e=>console.log("Autoplay zablokowany", e));
-  }
+  if(document.hidden){ muzyka.pause(); } 
 });
 </script>
 </body>
