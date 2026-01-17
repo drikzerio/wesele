@@ -57,7 +57,7 @@ header {
   align-items: center;
   text-align: center;
   position: relative;
-  padding-top: 1.5rem; /* Zmienione: połowa wcześniejszego paddingu */
+  padding-top: 1.5rem; /* połowa wcześniejszego */
 }
 
 header::after {
@@ -70,42 +70,52 @@ header::after {
 
 header h1 {
   position: relative;
-  color: #fff; /* Biała czcionka */
+  color: #fff;
   font-size: 5rem;
   white-space: nowrap;
+  margin-bottom: 1rem;
   z-index: 2;
 }
 
 #countdown {
   position: relative;
-  color:#fff; /* Biała czcionka */
+  color:#fff;
   font-size:2.8rem;
-  margin-top:1rem;
+  margin-bottom: 1rem;
   z-index:2;
 }
 
 /* ===== SEKCJE ===== */
 section {
   max-width: 1000px;
-  margin: 5rem auto;
-  padding: 3rem;
+  margin: 3rem auto; /* zmniejszone z 5rem */
+  padding: 2rem 2rem; /* zmniejszone z 3rem */
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px); /* delikatniejsze przesunięcie */
   transition: opacity 1s ease, transform 1s ease;
 }
 
 section.visible { opacity:1; transform:translateY(0); }
 
-h2 { text-align:center; font-size:3.8rem; margin-bottom:2rem; }
+h2 {
+  text-align:center;
+  font-size:3.8rem;
+  margin-bottom:1.2rem; /* zmniejszone */
+}
 
-p { font-size:2.5rem; line-height:2.2; text-align:center; }
+p {
+  font-size:2.5rem;
+  line-height:2;
+  text-align:center;
+  margin-bottom:1rem; /* zmniejszone */
+}
 
-.timeline p { font-size:2.5rem; }
+.timeline p { font-size:2.5rem; margin-bottom:1rem; }
 
 /* ===== MAPY ===== */
 .mapa {
   display:flex;
-  gap:3rem;
+  gap:2rem;
   flex-wrap:wrap;
   justify-content:center;
 }
@@ -119,7 +129,7 @@ p { font-size:2.5rem; line-height:2.2; text-align:center; }
   border-radius:12px;
 }
 
-.mapa-box p { font-size:2.5rem; margin-top:1.5rem; }
+.mapa-box p { font-size:2.5rem; margin-top:1rem; }
 
 /* ===== RSVP ===== */
 .rsvp-container iframe {
@@ -132,14 +142,14 @@ p { font-size:2.5rem; line-height:2.2; text-align:center; }
 /* ===== MOBILE ===== */
 @media(max-width:768px){
   header h1 { font-size:3rem; margin-top:2rem; }
-  #countdown { font-size:2rem; margin-top:2rem; }
+  #countdown { font-size:2rem; margin-top:1rem; }
   
-  h2 { font-size:2.8rem; }
-  p, .timeline p, .mapa-box p { font-size:1.8rem; }
-  section { margin:3rem 1rem; padding:2.5rem 1.8rem; }
+  h2 { font-size:2.8rem; margin-bottom:0.8rem; }
+  p, .timeline p, .mapa-box p { font-size:1.8rem; margin-bottom:0.8rem; }
+  section { margin:2rem 1rem; padding:1.8rem 1.5rem; }
 
   /* Koperta i stempel mobilnie */
-  .envelope { top:-80%; } /* oddalona dwukrotnie */
+  .envelope { top:-160%; } /* oddalona dwukrotnie */
   .seal { width:180px; height:180px; top:50%; transform: translate(-50%, -50%); }
 
   .rsvp-container iframe { height:2000px; }
