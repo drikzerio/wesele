@@ -4,50 +4,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Martyna | Damian</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="111.png">
 
 <style>
 /* ===== RESET ===== */
-* { box-sizing: border-box; margin:0; padding:0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 /* ===== BODY ===== */
 body {
   font-family: 'Carattere', cursive;
-  background: #fdfaf4;
   color: #000;
+  background: url('tlo.png') repeat;
   overflow-x: hidden;
-  position: relative;
 }
 
-/* ===== BLOKADA SCROLLU ===== */
-body.lock-scroll { overflow: hidden; }
+body.lock-scroll {
+  overflow: hidden;
+}
 
 /* ===== ENVELOPE FULLSCREEN ===== */
 .envelope {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  background: url('koperta.png') center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  background: url('envelope.png') center / cover no-repeat;
   z-index: 9999;
-  transition: opacity 0.6s ease;
 }
 
-/* STAMP - idealnie na środku zamknięcia koperty */
+.envelope.open {
+  animation: fadeOut 1s ease forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ===== SEAL ===== */
 .seal {
   position: absolute;
-  top: 61%;       /* dokładna wysokość stempla względem koperty */
   left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
   width: 250px;
   height: 250px;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  cursor: pointer;
+  transition: transform .3s ease, opacity .3s ease;
 }
 
 .seal img {
@@ -56,42 +64,16 @@ body.lock-scroll { overflow: hidden; }
   object-fit: contain;
 }
 
-/* Animacja stempla */
-@keyframes crack {
-  0%   { transform: translate(-50%, -50%) scale(1); }
-  50%  { transform: translate(-50%, -50%) scale(1.1) rotate(6deg); }
-  100% { transform: translate(-50%, -50%) scale(0); opacity:0; }
-}
-
-/* Koperta po otwarciu */
-.envelope.open {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Cień pojawiający się po otwarciu */
-.envelope.open::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
-  z-index: 1;
-}
-
 /* ===== HEADER ===== */
 header {
-  position: relative;
   min-height: 100vh;
-  background-image: url('header.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  background: url('header.jpg') center / cover no-repeat;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem;
 }
 
 header::after {
@@ -99,93 +81,99 @@ header::after {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.45);
-  z-index: 1;
 }
 
 header h1 {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   color: #fff;
-  font-size: clamp(4rem, 8vw, 7rem);
-  margin: 0;
-  letter-spacing: 2px;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  white-space: nowrap;
 }
 
 #countdown {
   position: relative;
-  z-index: 2;
-  margin-top: 2rem;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  z-index: 1;
   color: #fff;
-  font-weight: bold;
+  margin-top: 1.5rem;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-/* ===== SEKCJE ===== */
+/* ===== SECTIONS ===== */
 section {
   max-width: 900px;
-  margin: 3rem auto;
-  padding: 1rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s ease, transform 1s ease;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
 }
-
-section.visible { opacity:1; transform:translateY(0); }
 
 h2 {
-  text-align:center;
-  font-size:3rem;
-  margin-bottom:1rem;
-  color:#333; /* ciemniejszy, czytelny */
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
 }
 
-#drodzy p, .timeline p, .mapa-box p, #rsvp p {
-  font-size:1.4rem;
-  line-height:2;
-  text-align:center;
-  color:#000;
+p {
+  font-size: 1.4rem;
+  line-height: 2;
+  text-align: center;
 }
 
-/* Harmonogram */
+/* ===== TIMELINE ===== */
 .timeline {
-  background:#f8f5f0;
-  border-radius:12px;
-  padding:2rem;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  padding: 2rem;
 }
 
-/* Mapy */
+/* ===== MAPS ===== */
 .mapa {
-  display:flex;
-  gap:2rem;
-  flex-wrap:wrap;
-  justify-content:center;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .mapa-box {
-  flex:1 1 400px;
-  text-align:center;
+  flex: 1 1 400px;
+  text-align: center;
 }
 
 .mapa-box iframe {
-  width:100%;
-  height:350px;
-  border:none;
-  border-radius:12px;
+  width: 100%;
+  height: 350px;
+  border-radius: 12px;
+  border: none;
 }
 
-/* RSVP */
+/* ===== RSVP ===== */
 .rsvp-container iframe {
-  width:100%;
-  border:none;
-  border-radius:12px;
-  height:1400px;
+  width: 100%;
+  height: 1400px;
+  border: none;
+  border-radius: 12px;
 }
 
-/* Mobile */
-@media(max-width:768px){
-  header{padding:1rem;}
-  h2{font-size:2.4rem;}
-  #drodzy p, .timeline p, .mapa-box p, #rsvp p{font-size:1.2rem;}
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .seal {
+    width: 110px;
+    height: 110px;
+    top: 60%;
+  }
+
+  header h1 {
+    font-size: 3rem;
+  }
+
+  section {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
 }
 </style>
 </head>
@@ -205,74 +193,70 @@ h2 {
   <div id="countdown"></div>
 </header>
 
-<!-- SEKCJE -->
-<section id="drodzy">
-<h2>Drodzy!</h2>
-<p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju.<br><br>
-Po Mszy Świętej zapraszamy na przyjęcie weselne w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
-Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
-</p>
+<!-- CONTENT -->
+<section>
+  <h2>Drodzy!</h2>
+  <p>
+    Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00
+    w kościele pw. św. Marii Magdaleny w Biłgoraju.
+    <br><br>
+    Po Mszy Świętej zapraszamy na przyjęcie weselne
+    w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.
+  </p>
 </section>
 
-<section id="harmonogram">
-<h2>Harmonogram</h2>
-<div class="timeline">
-<p>14:00 – Msza Święta</p>
-<p>16:00 – Przyjęcie weselne</p>
-<p>04:00 – Autokar powrotny</p>
-</div>
-</section>
-
-<section id="mapa">
-<h2>Mapy dojazdu</h2>
-<div class="mapa">
-  <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
-    <p>Kościół</p>
+<section>
+  <h2>Harmonogram</h2>
+  <div class="timeline">
+    <p>14:00 – Msza Święta</p>
+    <p>16:00 – Przyjęcie weselne</p>
+    <p>04:00 – Autokar powrotny</p>
   </div>
-  <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
-    <p>Sala weselna</p>
-  </div>
-</div>
 </section>
 
-<section id="rsvp">
-<h2>Potwierdź obecność</h2>
-<p>Wypełnij formularz poniżej</p>
-<div class="rsvp-container">
-  <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
-</div>
+<section>
+  <h2>Mapy dojazdu</h2>
+  <div class="mapa">
+    <div class="mapa-box">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy"></iframe>
+      <p>Kościół</p>
+    </div>
+    <div class="mapa-box">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy"></iframe>
+      <p>Sala weselna</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Potwierdź obecność</h2>
+  <div class="rsvp-container">
+    <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
+  </div>
 </section>
 
 <script>
-// Countdown
+/* ===== COUNTDOWN ===== */
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
+
 setInterval(() => {
   const now = new Date().getTime();
   const diff = weddingDate - now;
+
   const d = Math.floor(diff / (1000*60*60*24));
   const h = Math.floor((diff / (1000*60*60)) % 24);
   const m = Math.floor((diff / (1000*60)) % 60);
-  const s = Math.floor((diff /1000)%60);
+  const s = Math.floor((diff / 1000) % 60);
+
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
-},1000);
+}, 1000);
 
-// Fade-in sekcji
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
-},{threshold:0.2});
-sections.forEach(s => observer.observe(s));
-
-// Envelope click
+/* ===== ENVELOPE CLICK ===== */
 const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 
 seal.addEventListener('click', () => {
-  seal.style.animation = 'crack 0.35s forwards';
   envelope.classList.add('open');
   document.body.classList.remove('lock-scroll');
 });
