@@ -14,7 +14,7 @@
 /* ===== BODY ===== */
 body {
   font-family: 'Carattere', cursive;
-  background: url('tlo.png') repeat; /* pełne tło */
+  background: url('tlo.png') repeat;
   color: #000;
   overflow-x: hidden;
   position: relative;
@@ -63,7 +63,7 @@ header {
   background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* lekko na dół */
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
   padding-bottom: 5rem;
@@ -116,7 +116,7 @@ h2 {
 
 /* Teksty opisów */
 #drodzy p, .timeline p, .mapa-box p, #rsvp p {
-  font-size:2rem; /* powiększona czcionka */
+  font-size:2rem;
   line-height:2.2;
   text-align:center;
   color:#000;
@@ -151,11 +151,14 @@ h2 {
 }
 
 /* RSVP */
+.rsvp-container {
+  width: 100%;
+}
 .rsvp-container iframe {
   width:100%;
   border:none;
   border-radius:12px;
-  height:1600px; /* pokazuje wszystkie pytania */
+  height:1600px;
 }
 
 /* Mobile */
@@ -165,15 +168,21 @@ h2 {
   header h1 { font-size: clamp(3rem,6vw,4rem); }
   #countdown { font-size: clamp(1.6rem,3vw,2rem); }
   h2 { font-size:2.4rem; }
-  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.6rem; line-height:1.9; } /* lekko zmniejszone na mobile */
+  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.6rem; line-height:1.9; }
   .envelope { justify-content:flex-start; }
   .seal { width:200px; height:200px; top:65%; }
 
-  /* Węższy panel RSVP na telefonach */
+  /* Wyśrodkowanie RSVP i węższy panel */
+  .rsvp-container {
+    display: flex;
+    justify-content: center;
+  }
+
   .rsvp-container iframe {
     max-width: 350px;
     width: 90%;
     margin: 0 auto;
+    height: 1600px;
   }
 }
 </style>
@@ -269,19 +278,18 @@ const seal = document.getElementById('seal');
 const muzyka = document.getElementById('muzyka');
 
 seal.addEventListener('click', () => {
-  // animacja stempla
   seal.style.transition = "transform 0.6s ease, opacity 0.6s ease";
   seal.style.transform = "translate(-50%,-50%) scale(0)";
   seal.style.opacity = 0;
 
-  // subtelne znikanie koperty
   envelope.style.transition = "opacity 0.8s ease";
   envelope.style.opacity = 0;
   setTimeout(() => envelope.style.display = 'none', 800);
 
-  document.body.classList.remove('lock-scroll'); // odblokowanie scrolla
+  document.body.classList.remove('lock-scroll');
   muzyka.play().catch(e=>console.log("Autoplay zablokowany", e));
 });
 </script>
 </body>
 </html>
+
