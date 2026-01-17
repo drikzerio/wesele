@@ -3,284 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Martyna | Damian</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="111.png">
+<title>Martyna & Damian – Wesele</title>
 
 <style>
-/* --- Ogólne --- */
+/* ===== RESET / PODSTAWY ===== */
 body {
-  font-family: 'Carattere', cursive;
-  font-size: 20px;
-  line-height: 1.8;
   margin: 0;
-  padding: 0;
-  background: #fdfaf4; /* jasny beż */
-  color: #55584a; /* ciemniejszy tekst */
-  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fffafc;
+  color: #333;
 }
 
-header {
-  background: linear-gradient(135deg, #c5d3a0, #e6e9d2); /* delikatna oliwka pastelowa */
-  color: #55584a;
-  text-align: center;
-  padding: 4rem 1rem;
+/* ===== EKRAN STARTOWY (KOPERTA) ===== */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: #f5f1eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* koperta */
+.envelope {
   position: relative;
+  width: 320px;
+  height: 200px;
+  background: #e8dfd3;
+  cursor: pointer;
   overflow: hidden;
 }
 
-header h1 {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
-  position: relative;
-  z-index: 2;
-}
-
-#countdown {
-  font-size: 2rem;
-  color: #9aa67f; /* oliwkowy akcent */
-  font-weight: bold;
-  margin-top: 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-/* Delikatny parallax */
-header::before {
-  content: '';
+/* klapa */
+.flap {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('https://images.unsplash.com/photo-1519985176271-adb1088fa94c?fit=crop&w=1400&q=80') center/cover no-repeat;
-  opacity: 0.05;
-  z-index: 1;
-  transform: translateY(0px);
-  transition: transform 0.2s ease-out;
+  inset: 0;
+  background: #e0d4c4;
+  clip-path: polygon(0 0, 100% 0, 50% 55%);
+  transform-origin: top;
+  transition: transform 0.9s ease;
+}
+
+/* list */
+.letter {
+  position: absolute;
+  bottom: -110%;
+  left: 10%;
+  width: 80%;
+  height: 150%;
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.2);
+  transition: bottom 1s ease;
+  text-align: center;
+}
+
+/* stempel */
+.seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+}
+
+.seal img {
+  width: 100%;
+  height: 100%;
+}
+
+/* animacje */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  bottom: -10%;
+}
+
+.envelope.open .seal {
+  animation: crack .35s ease forwards;
+}
+
+@keyframes crack {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1) rotate(6deg); }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+/* ===== STRONA (UKRYTA NA START) ===== */
+.hidden { display: none; }
+
+header {
+  background: linear-gradient(135deg, #ff6fa9, #ffb6c1);
+  color: white;
+  text-align: center;
+  padding: 4rem 1rem;
 }
 
 section {
   max-width: 900px;
   margin: 2rem auto;
   padding: 1rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-h2 {
-  color: #9aa67f; /* nagłówki oliwkowe */
-  margin-bottom: 1rem;
   text-align: center;
-  font-size: 2.8rem;
 }
 
-#drodzy p {
-  font-size: 22px;
-  line-height: 2;
+h2 { color: #ff6fa9; }
+
+/* mapy */
+.mapy {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.timeline {
-  background: #f3f4e7; /* bardzo jasna oliwka */
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-  font-size: 20px;
+.mapy div {
+  flex: 1 1 400px;
 }
 
 .mapa {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.mapa-box {
-  flex: 1 1 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.mapa-box:hover {
-  transform: translateY(-5px);
-}
-
-.mapa-box iframe {
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   border: none;
   border-radius: 12px;
 }
 
-.mapa-box p {
-  margin-top: 0.5rem;
-  font-weight: bold;
-  font-size: 28px;
-  text-align: center;
-  color: #55584a;
-}
-
-#rsvp h2 {
-  font-size: 28px;
-  color: #9aa67f;
-  text-align: center;
-}
-
-#rsvp p {
-  font-size: 24px;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.rsvp-container {
-  width: 100%;
-  border-radius: 12px;
-}
-
+/* RSVP */
 .rsvp {
   width: 100%;
+  min-height: 1200px;
   border: none;
-  transition: transform 0.3s ease;
+  border-radius: 12px;
 }
 
-.rsvp-container:hover {
-  transform: translateY(-5px);
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .mapa-box p {
-    font-size: 24px;
-  }
-  #rsvp h2 {
-    font-size: 24px;
-  }
-  #rsvp p {
-    font-size: 20px;
-  }
+footer {
+  background: #ff6fa9;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
 }
 </style>
 </head>
+
 <body>
 
+<!-- ===== INTRO ===== -->
+<div id="intro">
+  <div class="envelope" id="envelope">
+    <div class="letter">
+      <p>Martyna & Damian<br>07.08.2026</p>
+    </div>
+    <div class="flap"></div>
+    <div class="seal" id="seal">
+      <img src="seal.png" alt="Seal">
+    </div>
+  </div>
+</div>
+
+<!-- ===== STRONA ===== -->
+<div id="site" class="hidden">
+
 <header>
-  <h1>Martyna | Damian</h1>
-  <div id="countdown"></div>
+  <h1>Martyna & Damian</h1>
+  <p>Zapraszamy na nasz ślub – 7 sierpnia 2026</p>
 </header>
 
-<section id="drodzy">
-<h2>Drodzy!</h2>
-<p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św.  Marii Magdaleny w Biłgoraju.<br><br>
-Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
-Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do 31 maja 2026 roku.<br><br>
-W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami.<br>
-Amelia Grzywaczewska - 663 570 970<br>
-Dominik Kościk - 531 610 069<br>
-</p>
+<section>
+  <h2>Drodzy Goście</h2>
+  <p>Uroczystość zaślubin odbędzie się o godzinie 14:00.<br>
+  Po ceremonii zapraszamy na przyjęcie weselne.</p>
+
+  <h3>Świadkowie</h3>
+  <p>Amelia Grzywaczewska – 663 570 970</p>
+  <p>Dominik Kościk – 531 610 069</p>
+  <p>Joanna Zych – 694 307 639</p>
+  <p>Jakub Knap – 518 590 326</p>
 </section>
 
-<section id="harmonogram">
-<h2>Harmonogram</h2>
-<div class="timeline">
-<p>Msza Święta 14:00 – Kościół pw. św. Marii Magdaleny</p>
-<p>Przyjęcie weselne 16:00 – Karczma Pod Szczęśliwym Karpiem</p>
-  <p> Autokar powrotny do Biłgoraja 4:00 - chęć powrotu autokarem prosimy potwierdzić w RSVP</p>
-</div>
-</section>
-
-<section id="mapa">
-<h2>Mapy dojazdu</h2>
-<div class="mapa">
-  <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10146.510580157!2d22.710916547615184!3d50.52249471435416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <p>Kościół</p>
+<section>
+  <h2>Jak do nas trafić?</h2>
+  <div class="mapy">
+    <div>
+      <h3>Kościół</h3>
+      <iframe class="mapa" src="PASTE_MAPA_KOSCIOL"></iframe>
+    </div>
+    <div>
+      <h3>Sala weselna</h3>
+      <iframe class="mapa" src="PASTE_MAPA_SALA"></iframe>
+    </div>
   </div>
-  <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10187.963025440447!2d23.186543646603322!3d50.32942370426479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <p>Sala weselna</p>
-  </div>
-</div>
 </section>
 
-<section id="rsvp">
-<h2>Potwierdź swoją obecność</h2>
-<p>Prosimy o wypełnienie poniższego formularza, abyśmy mogli przygotować się na wspólne świętowanie.</p>
-<div class="rsvp-container">
-  <iframe class="rsvp" id="rsvpForm" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
-</div>
+<section>
+  <h2>RSVP</h2>
+  <iframe class="rsvp"
+    src="PASTE_GOOGLE_FORMS_LINK">
+  </iframe>
 </section>
 
-<audio id="muzyka" loop>
-  <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
-</audio>
+<footer>
+  <p>Do zobaczenia ❤️</p>
+</footer>
+
+</div>
 
 <script>
-// --- Countdown flip-style ---
-const weddingDate = new Date('2026-08-07T14:00:00').getTime();
-const countdownElement = document.getElementById('countdown');
+const envelope = document.getElementById('envelope');
+const intro = document.getElementById('intro');
+const site = document.getElementById('site');
 
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = weddingDate - now;
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  countdownElement.innerHTML = `<span>${days}</span> dni <span>${hours}</span> godzin <span>${minutes}</span> minut <span>${seconds}</span> sekund`;
-  if(distance < 0) {
-    countdownElement.innerHTML = "To już dziś!";
-    clearInterval(countdownInterval);
-  }
-}
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// --- Muzyka start ---
-const muzyka = document.getElementById('muzyka');
-let muzykaStarted = false;
-function startMuzyka() {
-  if(!muzykaStarted){
-    muzyka.play().catch(e => console.log("Autoplay zablokowany:", e));
-    muzykaStarted = true;
-  }
-}
-document.addEventListener('click', startMuzyka, {once:true});
-document.addEventListener('scroll', startMuzyka, {once:true, passive:true});
-document.addEventListener('touchstart', startMuzyka, {once:true});
-
-// --- Fade-in sekcji ---
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
-  });
-},{threshold: 0.2});
-sections.forEach(section => observer.observe(section));
-
-// --- Dynamic RSVP height ---
-function adjustRSVP() {
-  const iframe = document.getElementById('rsvpForm');
-  const width = window.innerWidth;
-  if(width <= 768){
-    iframe.style.height = '1500px';
-  } else {
-    iframe.style.height = '1200px';
-  }
-}
-window.addEventListener('load', adjustRSVP);
-window.addEventListener('resize', adjustRSVP);
+envelope.addEventListener('click', () => {
+  envelope.classList.add('open');
+  setTimeout(() => {
+    intro.style.display = 'none';
+    site.classList.remove('hidden');
+  }, 1200);
+});
 </script>
+
 </body>
 </html>
-
