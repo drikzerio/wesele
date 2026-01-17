@@ -91,4 +91,187 @@ header h1 {
   color:#fff;
   font-size: clamp(1.8rem, 4vw, 3rem);
   margin-bottom: 2rem;
-  z-index:2
+  z-index:2;
+}
+
+/* ===== SEKCJE ===== */
+section {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+section.visible { opacity:1; transform:translateY(0); }
+
+h2 {
+  text-align:center;
+  font-size:2.8rem;
+  margin-bottom: 1rem;
+  color:#000;
+}
+
+#drodzy p, .timeline p, .mapa-box p, #rsvp p {
+  font-size:1.8rem; /* większe opisy */
+  line-height:1.8;
+  text-align:center;
+  color:#000;
+  margin-bottom:1rem; /* mniejsze odstępy między akapitami */
+}
+
+/* Harmonogram */
+.timeline {
+  background:#f8f5f0;
+  border-radius:12px;
+  padding:2rem;
+}
+
+/* Mapy obok siebie */
+.mapa {
+  display:flex;
+  gap:2rem;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+.mapa-box {
+  flex:1 1 400px;
+  text-align:center;
+}
+
+.mapa-box iframe {
+  width:100%;
+  height:350px;
+  border:none;
+  border-radius:12px;
+}
+
+/* RSVP */
+.rsvp-container iframe {
+  width:100%;
+  border:none;
+  border-radius:12px;
+  height:1400px;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  header{padding-top:60vh;} /* koperta bardziej oddalona */
+  header h1 { font-size:4rem; margin-bottom:0.5rem; }
+  #countdown { font-size:2rem; margin-bottom:1rem; }
+
+  #drodzy p, .timeline p, .mapa-box p, #rsvp p{font-size:1.4rem;}
+  .rsvp-container iframe {height:1200px;}
+}
+body.lock-scroll{overflow:hidden;} /* blokada scrolla przed otwarciem koperty */
+
+/* Animacja stempla */
+@keyframes crack {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -50%) scale(1.1) rotate(6deg); }
+  100% { transform: translate(-50%, -50%) scale(0); opacity:0; }
+}
+</style>
+</head>
+
+<body class="lock-scroll">
+
+<!-- ENVELOPE -->
+<div class="envelope" id="envelope">
+  <div class="seal" id="seal">
+    <img src="seal.png" alt="Seal">
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <h1>Martyna | Damian</h1>
+  <div id="countdown"></div>
+</header>
+
+<!-- SEKCJE -->
+<section id="drodzy">
+<h2>Drodzy!</h2>
+<p>
+Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św.  Marii Magdaleny w Biłgoraju.<br><br>
+Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
+Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do 31 maja 2026 roku.<br><br>
+W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami.<br>
+Amelia Grzywaczewska - 663 570 970<br>
+Dominik Kościk - 531 610 069<br>
+</p>
+</section>
+
+<section id="harmonogram">
+<h2>Harmonogram</h2>
+<div class="timeline">
+<p>14:00 – Msza Święta</p>
+<p>16:00 – Przyjęcie weselne</p>
+<p>04:00 – Autokar powrotny</p>
+</div>
+</section>
+
+<section id="mapa">
+<h2>Mapy dojazdu</h2>
+<div class="mapa">
+  <div class="mapa-box">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Kościół</p>
+  </div>
+  <div class="mapa-box">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Sala weselna</p>
+  </div>
+</div>
+</section>
+
+<section id="rsvp">
+<h2>Potwierdź obecność</h2>
+<p>Wypełnij formularz poniżej</p>
+<div class="rsvp-container">
+  <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
+</div>
+</section>
+
+<audio id="muzyka" loop>
+  <source src="Lite Saturation - Piano Instrumental.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// Countdown
+const weddingDate = new Date('2026-08-07T14:00:00').getTime();
+const countdown = document.getElementById('countdown');
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+  const s = Math.floor((diff /1000)%60);
+  countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
+},1000);
+
+// Fade-in sekcji
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+},{threshold:0.2});
+sections.forEach(s => observer.observe(s));
+
+// Envelope click
+const envelope = document.getElementById('envelope');
+const seal = document.getElementById('seal');
+const muzyka = document.getElementById('muzyka');
+
+seal.addEventListener('click', () => {
+  envelope.classList.add('open');
+  seal.style.animation = 'crack 0.35s forwards';
+  document.body.classList.remove('lock-scroll');
+  muzyka.play().catch(e=>console.log("Autoplay zablokowany:", e));
+});
+</script>
+
+</body>
+</html>
