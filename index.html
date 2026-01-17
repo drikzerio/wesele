@@ -14,13 +14,14 @@
 /* ===== BODY ===== */
 body {
   font-family: 'Carattere', cursive;
-  background: url('tlo.png') top left repeat; /* powtarzaj obrazek, żeby nie rozciągało */
+  background: url('tlo.png') repeat; /* pełne tło */
   color: #000;
   overflow-x: hidden;
   position: relative;
 }
+body.lock-scroll { overflow: hidden; height: 100vh; }
 
-/* ===== ENVELOPE ===== */
+/* ===== ENVELOPE FULLSCREEN ===== */
 .envelope {
   position: fixed;
   inset: 0;
@@ -32,6 +33,7 @@ body {
   align-items: center;
   cursor: pointer;
   z-index: 9999;
+  transition: opacity 0.5s ease;
 }
 
 .seal {
@@ -42,7 +44,7 @@ body {
   width: 250px;
   height: 250px;
   cursor: pointer;
-  transition: transform .3s ease, opacity .3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .seal img {
@@ -51,68 +53,78 @@ body {
   object-fit: contain;
 }
 
-.envelope.open {
-  display: none;
-}
-
 /* ===== HEADER ===== */
 header {
   position: relative;
   min-height: 100vh;
-  background: url('naglowek.jpg') center/cover no-repeat;
+  background-image: url('naglowek.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-end; /* lekko na dół */
   align-items: center;
   text-align: center;
-  padding: 2rem;
+  padding-bottom: 5rem;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1;
 }
 
 header h1 {
   position: relative;
+  z-index: 2;
   color: #fff;
-  font-size: clamp(4rem, 8vw, 7rem);
-  margin-bottom: 0.5rem;
+  font-size: clamp(4rem, 8vw, 6rem);
+  margin: 0;
+  letter-spacing: 2px;
 }
 
 #countdown {
   position: relative;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  z-index: 2;
+  margin-top: 1rem;
+  font-size: clamp(2rem, 4vw, 3rem);
   color: #fff;
   font-weight: bold;
-  margin-bottom: 3rem;
 }
 
 /* ===== SEKCJE ===== */
 section {
   max-width: 900px;
-  margin: 1rem auto;
+  margin: 2rem auto;
   padding: 1rem;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition: opacity 1s ease, transform 1s ease;
-  background: none; /* usuń cover dla sekcji */
 }
 
 section.visible { opacity:1; transform:translateY(0); }
 
 h2 {
   text-align:center;
-  font-size:2.8rem;
+  font-size:3rem;
   margin-bottom:1rem;
   color:#000;
 }
 
-p {
-  font-size:1.8rem;
-  line-height:1.6;
+#drodzy p, .timeline p, .mapa-box p, #rsvp p {
+  font-size:1.6rem;
+  line-height:1.8;
   text-align:center;
+  color:#000;
   margin-bottom:1rem;
 }
 
 /* Harmonogram */
 .timeline {
-  background: url('tlo.png') center/cover no-repeat;
+  background:url('tlo.png') repeat;
   border-radius:12px;
   padding:2rem;
 }
@@ -132,41 +144,33 @@ p {
 
 .mapa-box iframe {
   width:100%;
-  height:400px;
+  height:350px;
   border:none;
   border-radius:12px;
 }
 
-.mapa-box p {
-  font-size:1.8rem;
-  margin-top:0.5rem;
-}
-
 /* RSVP */
-#rsvp p {
-  text-align:center;
-  font-size:1.8rem;
-}
-
 .rsvp-container iframe {
   width:100%;
   border:none;
   border-radius:12px;
-  height:2000px; /* pełna wysokość dla telefonu i kompa */
+  height:1600px; /* pokazuje wszystkie pytania */
 }
 
-/* ===== MOBILE ===== */
+/* Mobile */
 @media(max-width:768px){
-  header h1 { font-size:6vw; }
-  #countdown { font-size:3.5vw; margin-bottom:2rem; }
-  .seal { width:200px; height:200px; top:85%; } 
-  .mapa-box iframe { height:300px; }
-  .rsvp-container iframe { height:2500px; }
-  p { font-size:1.5rem; line-height:1.5; }
-  section { margin:1rem auto; padding:0.8rem; }
+  body.lock-scroll { overflow:hidden; }
+  header { padding-bottom: 10rem; }
+  header h1 { font-size: clamp(3rem,6vw,4rem); }
+  #countdown { font-size: clamp(1.6rem,3vw,2rem); }
+  h2 { font-size:2.4rem; }
+  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.3rem; }
+  .envelope { justify-content:flex-start; }
+  .seal { width:200px; height:200px; top:65%; }
 }
 </style>
 </head>
+
 <body class="lock-scroll">
 
 <!-- ENVELOPE -->
@@ -186,7 +190,7 @@ p {
 <section id="drodzy">
 <h2>Drodzy!</h2>
 <p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju.<br><br>
+Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św.  Marii Magdaleny w Biłgoraju.<br><br>
 Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
 Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do 31 maja 2026 roku.<br><br>
 W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami.<br>
@@ -208,11 +212,11 @@ Dominik Kościk - 531 610 069<br>
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10146.510580157!2d22.710916547615184!3d50.52249471435416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10187.963025440447!2d23.186543646603322!3d50.32942370426479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
@@ -220,7 +224,7 @@ Dominik Kościk - 531 610 069<br>
 
 <section id="rsvp">
 <h2>Potwierdź obecność</h2>
-<p>Prosimy o wypełnienie poniższego formularza, abyśmy mogli przygotować się na wspólne świętowanie.</p>
+<p>Wypełnij formularz poniżej</p>
 <div class="rsvp-container">
   <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
 </div>
@@ -231,7 +235,7 @@ Dominik Kościk - 531 610 069<br>
 </audio>
 
 <script>
-// ===== Countdown =====
+// Countdown
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
 setInterval(() => {
@@ -244,23 +248,31 @@ setInterval(() => {
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
-// ===== Fade-in sekcji =====
+// Fade-in sekcji
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
 },{threshold:0.2});
 sections.forEach(s => observer.observe(s));
 
-// ===== Envelope click =====
+// Envelope click + subtelne znikanie
 const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 const muzyka = document.getElementById('muzyka');
 
 seal.addEventListener('click', () => {
-  envelope.classList.add('open'); // koperta znika
+  // animacja stempla
+  seal.style.transition = "transform 0.6s ease, opacity 0.6s ease";
+  seal.style.transform = "translate(-50%,-50%) scale(0)";
   seal.style.opacity = 0;
-  document.body.classList.remove('lock-scroll');
-  muzyka.play().catch(e=>console.log("Autoplay zablokowany:",e));
+
+  // subtelne znikanie koperty
+  envelope.style.transition = "opacity 0.8s ease";
+  envelope.style.opacity = 0;
+  setTimeout(() => envelope.style.display = 'none', 800);
+
+  document.body.classList.remove('lock-scroll'); // odblokowanie scrolla
+  muzyka.play().catch(e=>console.log("Autoplay zablokowany", e));
 });
 </script>
 </body>
