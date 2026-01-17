@@ -4,37 +4,95 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Martyna | Damian</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="111.png">
 
 <style>
-*{box-sizing:border-box; margin:0; padding:0;}
-body {font-family:'Carattere', cursive; background:#fdfaf4; color:#000; overflow-x:hidden;}
+/* ===== RESET & PODSTAWY ===== */
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+body {
+  font-family: 'Carattere', cursive;
+  background: #fdfaf4;
+  color: #000000;
+  overflow-x: hidden;
+}
+
+/* ===== ENVELOPE OVERLAY ===== */
+#envelopeOverlay{
+  position:fixed;
+  inset:0;
+  background:url('envelope.png') center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  overflow:hidden;
+}
+
+#seal{
+  position:absolute;
+  bottom:18%;
+  left:48%;
+  width:150px;
+  height:150px;
+  cursor:pointer;
+  z-index:10000;
+  transition: transform 0.6s ease;
+}
+
+@media(max-width:768px){
+  #seal{
+    width:110px;
+    height:110px;
+    bottom:16%;
+    left:48%;
+  }
+}
 
 /* ===== HEADER ===== */
 header{
-  position: relative;
+  position:relative;
   min-height:100vh;
-  background: url('header.jpg') center/cover no-repeat;
-  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+  background-image: url('header.jpg');
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:2rem;
 }
+
 header::after{
   content:'';
-  position:absolute; inset:0;
+  position:absolute;
+  inset:0;
   background: rgba(0,0,0,0.45);
   z-index:1;
 }
+
 header h1{
-  position:relative; z-index:2;
-  color:#fff;
-  font-size:clamp(4rem,8vw,7rem);
+  position:relative;
+  z-index:2;
+  color:#ffffff;
+  font-size: clamp(4rem, 8vw, 7rem);
+  margin:0;
   letter-spacing:2px;
 }
+
 #countdown{
-  position:relative; z-index:2;
+  position:relative;
+  z-index:2;
   margin-top:2rem;
-  font-size:clamp(1.8rem,4vw,3rem);
-  color:#fff;
+  font-size:clamp(1.8rem, 4vw, 3rem);
+  color:#ffffff;
   font-weight:bold;
 }
 
@@ -47,67 +105,85 @@ section{
   transform:translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
 }
-section.visible{opacity:1; transform:translateY(0);}
-h2{text-align:center; font-size:3rem; margin-bottom:1rem; color:#222;}
-#drodzy p{text-align:center; font-size:1.4rem; line-height:2;}
+
+section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h2{
+  text-align:center;
+  font-size:3rem;
+  margin-bottom:1rem;
+  color:#333333; /* zmienione na czarny pasujący do kolorystyki */
+}
+
+#drodzy p, .timeline p, .mapa-box p, #rsvp p{
+  color:#000000;
+}
 
 /* ===== HARMONOGRAM ===== */
 .timeline{
-  background:#f7f5f0; border-radius:12px; padding:2rem; text-align:center; font-size:1.4rem;
+  background:#f8f5f0;
+  border-radius:12px;
+  padding:2rem;
+  text-align:center;
+  font-size:1.4rem;
 }
 
 /* ===== MAPY ===== */
-.mapa{display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;}
-.mapa-box{flex:1 1 400px; text-align:center;}
-.mapa-box iframe{width:100%; height:350px; border:none; border-radius:12px;}
-.mapa-box p{font-size:1.8rem; margin-top:0.5rem; color:#000;}
+.mapa{
+  display:flex;
+  gap:2rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.mapa-box{
+  flex:1 1 400px;
+  text-align:center;
+}
+
+.mapa-box iframe{
+  width:100%;
+  height:350px;
+  border:none;
+  border-radius:12px;
+}
+
+.mapa-box p{
+  font-size:1.8rem;
+  margin-top:0.5rem;
+}
 
 /* ===== RSVP ===== */
-#rsvp p{text-align:center; font-size:1.4rem;}
-.rsvp-container iframe{width:100%; border:none; border-radius:12px;}
-
-/* ===== ENVELOPE + SEAL ===== */
-#envelopeOverlay{
-  position:fixed; inset:0;
-  background:url('envelope.jpg') center/cover no-repeat;
-  display:flex; justify-content:center; align-items:center;
-  z-index:9999;
-  overflow:hidden;
-}
-#seal{
-  position:absolute;
-  bottom:18%;
-  left:48%;
-  width:150px;
-  height:150px;
-  cursor:pointer;
-  z-index:10000;
-  transition: transform 0.6s ease;
+#rsvp h2{
+  color:#333333;
 }
 
-/* ANIMACJA STEMPLA */
-#envelopeOverlay.open #seal{
-  animation: crack 0.35s ease forwards;
+#rsvp p{
+  text-align:center;
+  font-size:1.4rem;
 }
-@keyframes crack{
-  0% {transform: translate(-50%,-50%) scale(1);}
-  50% {transform: translate(-50%,-50%) scale(1.1) rotate(6deg);}
-  100% {transform: translate(-50%,-50%) scale(0); opacity:0;}
+
+.rsvp-container iframe{
+  width:100%;
+  border:none;
+  border-radius:12px;
 }
 
 /* ===== MOBILE ===== */
-@media(max-width:768px){
-  header h1{font-size:clamp(3rem,8vw,5rem);}
-  #countdown{font-size:clamp(1.5rem,4vw,2.4rem);}
-  #seal{width:110px;height:110px; bottom:16%; left:48%;}
+@media (max-width:768px){
+  header{padding:1rem;}
   h2{font-size:2.4rem;}
   #drodzy p{font-size:1.2rem;}
+  .mapa-box p{font-size:1.5rem;}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== ENVELOPE OVERLAY ===== -->
+<!-- ENVELOPE -->
 <div id="envelopeOverlay">
   <img src="seal.png" id="seal" alt="Seal">
 </div>
@@ -120,9 +196,9 @@ h2{text-align:center; font-size:3rem; margin-bottom:1rem; color:#222;}
 <section id="drodzy">
 <h2>Drodzy!</h2>
 <p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 o godz. 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju.<br><br>
+Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju.<br><br>
 Po Mszy Świętej zapraszamy na przyjęcie weselne w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
-Prosimy o potwierdzenie obecności do 31 maja 2026.
+Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 </p>
 </section>
 
@@ -139,11 +215,11 @@ Prosimy o potwierdzenie obecności do 31 maja 2026.
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
@@ -158,33 +234,38 @@ Prosimy o potwierdzenie obecności do 31 maja 2026.
 </section>
 
 <script>
-// ===== COUNTDOWN =====
+// ===== Countdown =====
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
-setInterval(()=>{
-  const now=new Date().getTime();
-  const diff=weddingDate-now;
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/(1000*60))%60);
-  const s=Math.floor((diff/1000)%60);
-  countdown.innerHTML=`${d} dni ${h} godz ${m} min ${s} sek`;
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+  const s = Math.floor((diff/1000)%60);
+  countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
-// ===== FADE-IN SEKCJI =====
-const sections=document.querySelectorAll('section');
-const observer=new IntersectionObserver(entries=>{
+// ===== Fade-in sekcji =====
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>e.isIntersecting && e.target.classList.add('visible'));
 },{threshold:0.2});
 sections.forEach(s=>observer.observe(s));
 
-// ===== ENVELOPE CLICK =====
-const envelope=document.getElementById('envelopeOverlay');
-const seal=document.getElementById('seal');
-document.body.style.overflow='hidden'; // blokada scrolla
+// ===== Envelope click =====
+const envelopeOverlay = document.getElementById('envelopeOverlay');
+const seal = document.getElementById('seal');
+document.body.style.overflow = "hidden"; // blokada scrolla
 seal.addEventListener('click',()=>{
-  envelope.classList.add('open');
-  document.body.style.overflow='auto'; // odblokowanie scrolla po kliknięciu
+  seal.style.transform = "scale(1.3) rotate(10deg)";
+  setTimeout(()=>{
+    envelopeOverlay.style.opacity = 0;
+    envelopeOverlay.style.transform = "scale(1.05)";
+    document.body.style.overflow = "auto"; // odblokowanie scrolla
+  },600);
+  setTimeout(()=>{envelopeOverlay.style.display="none";},1200);
 });
 </script>
 
