@@ -14,7 +14,7 @@
 /* ===== BODY ===== */
 body {
   font-family: 'Carattere', cursive;
-  background: url('tlo.png') center/cover no-repeat;
+  background: url('tlo.png') top left repeat; /* powtarzaj obrazek, żeby nie rozciągało */
   color: #000;
   overflow-x: hidden;
   position: relative;
@@ -91,7 +91,7 @@ section {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
-  background: url('tlo.png') center/cover no-repeat;
+  background: none; /* usuń cover dla sekcji */
 }
 
 section.visible { opacity:1; transform:translateY(0); }
