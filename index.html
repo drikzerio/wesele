@@ -4,85 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Martyna | Damian</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="111.png">
 
 <style>
-/* ===== RESET & PODSTAWY ===== */
-* { box-sizing: border-box; margin:0; padding:0; }
-body {
-  font-family: 'Carattere', cursive;
-  background:#fdfaf4;
-  color:#000;
-  overflow-x:hidden;
-}
+/* --- RESET --- */
+* {box-sizing: border-box; margin:0; padding:0;}
+body {font-family:'Carattere', cursive; background:#fdfaf4; color:#000; overflow-x:hidden;}
 
-/* ===== ENVELOPE / KOPERTA ===== */
-#envelope {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:#e0d6c2;
-  display:flex; justify-content:center; align-items:center;
-  z-index:9999;
-  cursor:pointer;
-  overflow:hidden;
-}
-#envelope .flap {
-  position:absolute;
+/* --- ENVELOPE OVERLAY --- */
+#envelopeOverlay {
+  position: fixed;
   inset:0;
-  background:#c4b39d;
-  clip-path: polygon(0 0, 100% 0, 50% 55%);
-  transform-origin: top;
-  transition: transform 0.9s ease;
-  z-index:2;
-}
-#envelope .letter {
-  position:absolute;
-  bottom:-120%;
-  left:5%;
-  width:90%;
-  height:150%;
-  background:transparent;
-  transition: bottom 1s ease;
-  z-index:1;
-}
-#envelope .seal {
-  position:absolute;
-  bottom:5%;
-  left:50%;
-  width:120px;
-  height:120px;
-  transform:translateX(-50%);
-  transition: transform .4s ease, opacity .4s ease;
-  z-index:3;
-}
-#envelope .seal img { width:100%; height:100%; object-fit:contain; }
-#envelope.open .flap { transform: rotateX(180deg); }
-#envelope.open .letter { bottom:0; } 
-#envelope.open .seal { animation: crack 0.5s ease forwards; }
-@keyframes crack {
-  0% { transform:translateX(-50%) scale(1); }
-  50% { transform:translateX(-50%) scale(1.2) rotate(6deg); }
-  100% { transform:translateX(-50%) scale(0); opacity:0; }
-}
-
-/* ===== HEADER ===== */
-header {
-  position:relative;
-  min-height:100vh;
-  background-image:url('header.jpg');
-  background-repeat:no-repeat;
-  background-position:center center;
-  background-size:cover;
+  background: url('envelope.png') center/cover no-repeat;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
-  padding:2rem;
+  z-index: 9999;
+  transition: transform 1s ease, opacity 0.8s ease;
+  overflow:hidden;
 }
+
+#seal {
+  position: absolute;
+  bottom: 18%;
+  width: 120px;
+  height: 120px;
+  cursor:pointer;
+  z-index:10000;
+  transition: transform 0.6s ease;
+}
+
+/* Cień pojawia się dopiero po kliknięciu */
+#envelopeOverlay.open::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  box-shadow: inset 0 -50px 80px rgba(0,0,0,0.4);
+  transition: box-shadow 1s ease;
+}
+
+/* --- HEADER --- */
+header {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('header.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  overflow:hidden;
+}
+
 header::after {
   content:'';
   position:absolute;
@@ -90,16 +68,18 @@ header::after {
   background: rgba(0,0,0,0.45);
   z-index:1;
 }
+
 header h1 {
-  position:relative;
+  position: relative;
   z-index:2;
   color:#fff;
   font-size:clamp(4rem,8vw,7rem);
   margin:0;
   letter-spacing:2px;
 }
+
 #countdown {
-  position:relative;
+  position: relative;
   z-index:2;
   margin-top:2rem;
   font-size:clamp(1.8rem,4vw,3rem);
@@ -107,87 +87,56 @@ header h1 {
   font-weight:bold;
 }
 
-/* ===== SEKCJE ===== */
+/* --- SEKCJE --- */
 section {
-  max-width:900px;
-  margin:3rem auto;
-  padding:1rem;
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 1rem;
   opacity:0;
-  transform:translateY(30px);
-  transition:opacity 1s ease, transform 1s ease;
-}
-section.visible { opacity:1; transform:translateY(0); }
-h2 {
-  text-align:center;
-  font-size:3rem;
-  margin-bottom:1rem;
-  color:#333; /* nagłówki czarne */
-}
-section p { font-size:1.4rem; line-height:2; text-align:center; color:#000; }
-
-/* ===== HARMONOGRAM ===== */
-.timeline {
-  background:#f2f2f2;
-  border-radius:12px;
-  padding:2rem;
-  text-align:center;
-  font-size:1.4rem;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
-/* ===== MAPY ===== */
-.mapa {
-  display:flex;
-  gap:2rem;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.mapa-box {
-  flex:1 1 400px;
-  text-align:center;
-}
-.mapa-box iframe {
-  width:100%;
-  height:350px;
-  border:none;
-  border-radius:12px;
-}
-.mapa-box p { font-size:1.8rem; margin-top:0.5rem; color:#000; }
+section.visible {opacity:1; transform:translateY(0);}
 
-/* ===== RSVP ===== */
-#rsvp p { text-align:center; font-size:1.4rem; color:#000; }
-.rsvp-container iframe {
-  width:100%;
-  border:none;
-  border-radius:12px;
-  height:1400px;
-}
+h2 {text-align:center; font-size:3rem; margin-bottom:1rem; color:#333;}
 
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-  header{ padding:1rem; }
-  h2{ font-size:2.4rem; }
-  section p{ font-size:1.2rem; }
-  .mapa-box iframe{ height:250px; }
-}
+#drodzy p {font-size:1.4rem; line-height:2; text-align:center; color:#000;}
 
+/* --- HARMONOGRAM --- */
+.timeline {background:#ece6db; border-radius:12px; padding:2rem; text-align:center; font-size:1.4rem;}
+
+/* --- MAPY --- */
+.mapa {display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;}
+.mapa-box {flex:1 1 400px; text-align:center;}
+.mapa-box iframe {width:100%; height:350px; border:none; border-radius:12px;}
+.mapa-box p {font-size:1.8rem; margin-top:0.5rem; color:#000;}
+
+/* --- RSVP --- */
+#rsvp p {text-align:center; font-size:1.4rem; color:#000;}
+.rsvp-container iframe {width:100%; border:none; border-radius:12px;}
+
+/* --- MOBILE --- */
+@media (max-width:768px){
+  header {padding:1rem;}
+  h2 {font-size:2.4rem;}
+  #drodzy p {font-size:1.2rem;}
+  #seal {width:90px; height:90px; bottom:16%;}
+}
 </style>
 </head>
 <body>
 
-<!-- KOPERTA -->
-<div id="envelope">
-  <div class="letter"></div>
-  <div class="flap"></div>
-  <div class="seal"><img src="seal.png" alt="Seal"></div>
+<!-- ENVELOPE OVERLAY -->
+<div id="envelopeOverlay">
+  <img src="seal.png" id="seal" alt="Seal">
 </div>
 
-<!-- HEADER -->
 <header>
   <h1>Martyna | Damian</h1>
   <div id="countdown"></div>
 </header>
 
-<!-- SEKCJA Drodzy -->
 <section id="drodzy">
 <h2>Drodzy!</h2>
 <p>
@@ -197,7 +146,6 @@ Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 </p>
 </section>
 
-<!-- HARMONOGRAM -->
 <section id="harmonogram">
 <h2>Harmonogram</h2>
 <div class="timeline">
@@ -207,57 +155,58 @@ Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 </div>
 </section>
 
-<!-- MAPY -->
 <section id="mapa">
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="TUTAJ_WKLEJ_LINK_DO_MAPY_KOSCIOL" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="TUTAJ_WKLEJ_LINK_DO_MAPY_SALA" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
 </section>
 
-<!-- RSVP -->
 <section id="rsvp">
 <h2>Potwierdź obecność</h2>
 <p>Wypełnij formularz poniżej</p>
 <div class="rsvp-container">
-  <iframe src="TUTAJ_WKLEJ_LINK_DO_RSVP"></iframe>
+  <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u" style="height:1400px"></iframe>
 </div>
 </section>
 
 <script>
-// ===== ENVELOPE CLICK =====
-const envelope=document.getElementById('envelope');
-envelope.addEventListener('click', ()=>{
-  envelope.classList.add('open');
-  setTimeout(()=>{ envelope.style.display='none'; },500);
-});
-
-// ===== COUNTDOWN =====
+// --- Countdown ---
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
-setInterval(()=>{
-  const now=new Date().getTime();
-  const diff=weddingDate-now;
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/(1000*60))%60);
-  const s=Math.floor((diff/1000)%60);
-  countdown.innerHTML=`${d} dni ${h} godz ${m} min ${s} sek`;
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60))%24);
+  const m = Math.floor((diff / (1000*60))%60);
+  const s = Math.floor((diff/1000)%60);
+  countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
-// ===== FADE-IN SEKCJI =====
+// --- Fade-in sekcji ---
 const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible'));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
 },{threshold:0.2});
-sections.forEach(s=>observer.observe(s));
+sections.forEach(s => observer.observe(s));
+
+// --- Envelope open ---
+const envelope = document.getElementById('envelopeOverlay');
+const seal = document.getElementById('seal');
+seal.addEventListener('click',()=>{
+  envelope.classList.add('open');
+  envelope.style.transform = 'translateY(-100vh)';
+  envelope.style.opacity='0';
+  document.body.style.overflow='auto';
+});
 </script>
 
 </body>
