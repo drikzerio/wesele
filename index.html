@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Martyna | Damian</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="111.png">
 
 <style>
-/* ===== RESET & PODSTAWY ===== */
+/* ===== RESET ===== */
 * { box-sizing: border-box; margin:0; padding:0; }
+
+/* ===== BODY I TŁO ===== */
 body {
   font-family: 'Carattere', cursive;
   background: url('tlo.png') center/cover no-repeat;
@@ -31,18 +32,17 @@ body {
   align-items: center;
   cursor: pointer;
   z-index: 9999;
-  transition: opacity 0.6s ease;
 }
 
 .seal {
   position: absolute;
   left: 50%;
-  top: 60%;
+  top: 60%; /* idealne miejsce dla stempla */
   transform: translate(-50%, -50%);
   width: 250px;
   height: 250px;
   cursor: pointer;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform .3s ease, opacity .3s ease;
 }
 
 .seal img {
@@ -51,16 +51,9 @@ body {
   object-fit: contain;
 }
 
-/* cień po otwarciu */
-.envelope.open::after {
-  content:'';
-  position: absolute;
-  inset:0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
-  z-index:1;
+.envelope.open {
+  display: none; /* koperta znika po kliknięciu */
 }
-
-.envelope.hidden { display:none; }
 
 /* ===== HEADER ===== */
 header {
@@ -69,33 +62,21 @@ header {
   background: url('naglowek.jpg') center/cover no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-end; /* obniżenie nagłówka */
   align-items: center;
   text-align: center;
-  padding-bottom: 8rem;
-}
-
-header::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 1;
+  padding: 2rem;
 }
 
 header h1 {
   position: relative;
-  z-index: 2;
   color: #fff;
   font-size: clamp(4rem, 8vw, 7rem);
-  margin: 0;
-  letter-spacing: 2px;
+  margin-bottom: 1rem; /* odległość od licznika */
 }
 
 #countdown {
   position: relative;
-  z-index: 2;
-  margin-top: 2rem;
   font-size: clamp(1.8rem, 4vw, 3rem);
   color: #fff;
   font-weight: bold;
@@ -104,37 +85,34 @@ header h1 {
 /* ===== SEKCJE ===== */
 section {
   max-width: 900px;
-  margin: 2rem auto;
+  margin: 1.5rem auto; /* mniejsze odstępy między akapitami */
   padding: 1rem;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
-  background: url('tlo.png') center/cover no-repeat;
-  border-radius: 12px;
 }
 
 section.visible { opacity:1; transform:translateY(0); }
 
 h2 {
   text-align:center;
-  font-size:3rem;
+  font-size:2.8rem;
   margin-bottom:1rem;
-  color:#333;
+  color:#000;
 }
 
-#drodzy p, .timeline p, .mapa-box p, #rsvp p {
-  font-size:1.8rem;
+p {
+  font-size:1.6rem; /* większe opisy */
   line-height:1.8;
   text-align:center;
-  color:#000;
   margin-bottom:1rem;
 }
 
 /* Harmonogram */
 .timeline {
   background: url('tlo.png') center/cover no-repeat;
-  border-radius: 12px;
-  padding: 2rem;
+  border-radius:12px;
+  padding:2rem;
 }
 
 /* Mapy */
@@ -157,26 +135,38 @@ h2 {
   border-radius:12px;
 }
 
+.mapa-box p {
+  font-size:1.8rem;
+  margin-top:0.5rem;
+}
+
 /* RSVP */
+#rsvp p {
+  text-align:center;
+  font-size:1.6rem;
+}
+
 .rsvp-container iframe {
   width:100%;
   border:none;
   border-radius:12px;
-  height:1400px;
+  height:2000px; /* całe pytania od razu widać na telefonie */
 }
 
-/* Mobile */
+/* ===== MOBILE ===== */
 @media(max-width:768px){
-  header { padding-bottom:16rem; }
-  header h1 { font-size:4rem; }
-  #countdown { font-size:2rem; }
-  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.4rem; }
-  .seal { width:150px; height:150px; top:55%; }
-  .rsvp-container iframe { height:1200px; }
+  header h1 {
+    font-size:5vw; /* trochę mniejszy na telefonie */
+  }
+  #countdown { font-size:3vw; }
+  .seal { width:200px; height:200px; top:80%; } /* koperta bardziej oddalona */
+  .mapa-box iframe { height:300px; }
+  .rsvp-container iframe { height:2200px; } /* większa wysokość dla telefonu */
+  p { font-size:1.4rem; line-height:1.6; }
+  section { margin:1rem auto; padding:0.8rem; }
 }
 </style>
 </head>
-
 <body class="lock-scroll">
 
 <!-- ENVELOPE -->
@@ -196,7 +186,7 @@ h2 {
 <section id="drodzy">
 <h2>Drodzy!</h2>
 <p>
-Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św.  Marii Magdaleny w Biłgoraju.<br><br>
+Uroczystość zaślubin odbędzie się 7 sierpnia 2026 roku o godzinie 14:00 w kościele pw. św. Marii Magdaleny w Biłgoraju.<br><br>
 Po Mszy Świętej z przyjemnością zapraszamy Was na przyjęcie weselne, które odbędzie się w Karczmie Pod Szczęśliwym Karpiem w Rudzie Różanieckiej.<br><br>
 Uprzejmie prosimy o potwierdzenie obecności poprzez formularz dostępny na dole strony do 31 maja 2026 roku.<br><br>
 W dniu ślubu, w razie pytań lub wątpliwości, można skontaktować się z naszymi świadkami.<br>
@@ -218,11 +208,11 @@ Dominik Kościk - 531 610 069<br>
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10146.510580157!2d22.710916547615184!3d50.52249471435416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1757286511524!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10187.963025440447!2d23.186543646603322!3d50.32942370426479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1757286186467!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
@@ -230,7 +220,7 @@ Dominik Kościk - 531 610 069<br>
 
 <section id="rsvp">
 <h2>Potwierdź obecność</h2>
-<p>Wypełnij formularz poniżej</p>
+<p>Prosimy o wypełnienie poniższego formularza, abyśmy mogli przygotować się na wspólne świętowanie.</p>
 <div class="rsvp-container">
   <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
 </div>
@@ -241,7 +231,7 @@ Dominik Kościk - 531 610 069<br>
 </audio>
 
 <script>
-// Countdown
+// ===== Countdown =====
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
 setInterval(() => {
@@ -254,36 +244,24 @@ setInterval(() => {
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
-// Fade-in sekcji
+// ===== Fade-in sekcji =====
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
 },{threshold:0.2});
 sections.forEach(s => observer.observe(s));
 
-// Envelope click
+// ===== Envelope click =====
 const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 const muzyka = document.getElementById('muzyka');
 
 seal.addEventListener('click', () => {
-  seal.style.animation = 'crack 0.35s forwards';
-  setTimeout(() => {
-    envelope.classList.add('hidden');
-    document.body.classList.remove('lock-scroll');
-    muzyka.play().catch(e=>console.log("Autoplay zablokowany", e));
-  }, 350);
+  envelope.classList.add('open'); // koperta znika
+  seal.style.opacity = 0; 
+  document.body.classList.remove('lock-scroll');
+  muzyka.play().catch(e=>console.log("Autoplay zablokowany:",e));
 });
-
-// Crack animation
-const style = document.createElement('style');
-style.innerHTML = `
-@keyframes crack {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.1) rotate(6deg); }
-  100% { transform: translate(-50%, -50%) scale(0); opacity:0; }
-}`;
-document.head.appendChild(style);
 </script>
 </body>
 </html>
