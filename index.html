@@ -4,184 +4,193 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Martyna | Damian</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="111.png">
 
 <style>
+/* ===== RESET ===== */
 * { box-sizing: border-box; margin:0; padding:0; }
 
+/* ===== BODY ===== */
 body {
   font-family: 'Carattere', cursive;
   background: #fdfaf4;
   color: #000;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* ===== ENVELOPE OVERLAY ===== */
-#envelopeOverlay{
-  position:fixed;
-  inset:0;
-  background:url('envelope.png') center/cover no-repeat;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  overflow:hidden;
+/* ===== ENVELOPE FULLSCREEN ===== */
+.envelope {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: url('envelope.png') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
 }
 
-#seal{
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:180px;
-  height:180px;
-  cursor:pointer;
-  z-index:10000;
-  transition: transform 0.6s ease;
+.seal {
+  position: absolute;
+  bottom: 20%; /* dokładnie w miejscu złożenia koperty */
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%);
+  left: 50%;
+  z-index: 2;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-/* ===== HEADER ===== */
-header{
-  position:relative;
-  min-height:100vh;
-  background-image: url('header.jpg');
-  background-repeat:no-repeat;
-  background-position:center center;
-  background-size:cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:2rem;
+.seal img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-header::after{
+/* cień po otwarciu */
+.envelope.open::after {
   content:'';
-  position:absolute;
+  position: absolute;
   inset:0;
-  background: rgba(0,0,0,0.45);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0));
   z-index:1;
 }
 
-header h1{
-  position:relative;
-  z-index:2;
-  color:#ffffff;
-  font-size: clamp(4rem, 8vw, 7rem);
-  margin:0;
-  letter-spacing:2px;
+/* ===== HEADER ===== */
+header {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('header.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
 }
 
-#countdown{
-  position:relative;
-  z-index:2;
-  margin-top:2rem;
-  font-size:clamp(1.8rem, 4vw, 3rem);
-  color:#ffffff;
-  font-weight:bold;
+header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1;
+}
+
+header h1 {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  font-size: clamp(4rem, 8vw, 7rem);
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+#countdown {
+  position: relative;
+  z-index: 2;
+  margin-top: 2rem;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: #fff;
+  font-weight: bold;
 }
 
 /* ===== SEKCJE ===== */
-section{
-  max-width:900px;
-  margin:3rem auto;
-  padding:1rem;
-  opacity:0;
-  transform:translateY(30px);
+section {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
 }
 
-section.visible{
-  opacity:1;
-  transform:translateY(0);
-}
+section.visible { opacity:1; transform:translateY(0); }
 
-h2{
+h2 {
   text-align:center;
   font-size:3rem;
   margin-bottom:1rem;
-  color:#333333;
+  color:#000;
 }
 
-#drodzy p, .timeline p, .mapa-box p, #rsvp p{
-  color:#000000;
+#drodzy p, .timeline p, .mapa-box p, #rsvp p {
+  font-size:1.4rem;
+  line-height:2;
+  text-align:center;
+  color:#000;
 }
 
-/* ===== HARMONOGRAM ===== */
-.timeline{
+/* Harmonogram */
+.timeline {
   background:#f8f5f0;
   border-radius:12px;
   padding:2rem;
-  text-align:center;
-  font-size:1.4rem;
 }
 
-/* ===== MAPY ===== */
-.mapa{
+/* Mapy */
+.mapa {
   display:flex;
   gap:2rem;
   flex-wrap:wrap;
   justify-content:center;
 }
 
-.mapa-box{
+.mapa-box {
   flex:1 1 400px;
   text-align:center;
 }
 
-.mapa-box iframe{
+.mapa-box iframe {
   width:100%;
   height:350px;
   border:none;
   border-radius:12px;
 }
 
-.mapa-box p{
-  font-size:1.8rem;
-  margin-top:0.5rem;
-}
-
-/* ===== RSVP ===== */
-#rsvp h2{
-  color:#333333;
-}
-
-#rsvp p{
-  text-align:center;
-  font-size:1.4rem;
-}
-
-.rsvp-container iframe{
+/* RSVP */
+.rsvp-container iframe {
   width:100%;
   border:none;
   border-radius:12px;
+  height:1400px;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width:768px){
+/* Mobile */
+@media(max-width:768px){
   header{padding:1rem;}
   h2{font-size:2.4rem;}
-  #drodzy p{font-size:1.2rem;}
-  .mapa-box p{font-size:1.5rem;}
-  #seal{width:130px; height:130px;}
+  #drodzy p, .timeline p, .mapa-box p, #rsvp p{font-size:1.2rem;}
 }
+
+/* Blokada scrollowania przed otwarciem koperty */
+body.lock-scroll{overflow:hidden;}
 </style>
 </head>
-<body>
+
+<body class="lock-scroll">
 
 <!-- ENVELOPE -->
-<div id="envelopeOverlay">
-  <img src="seal.png" id="seal" alt="Seal">
+<div class="envelope" id="envelope">
+  <div class="seal" id="seal">
+    <img src="seal.png" alt="Seal">
+  </div>
 </div>
 
+<!-- HEADER -->
 <header>
   <h1>Martyna | Damian</h1>
   <div id="countdown"></div>
 </header>
 
+<!-- SEKCJE -->
 <section id="drodzy">
 <h2>Drodzy!</h2>
 <p>
@@ -204,11 +213,11 @@ Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 <h2>Mapy dojazdu</h2>
 <div class="mapa">
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.5897266442244!2d22.709457376879953!3d50.52320017160617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472335c17d5717b9%3A0x9e4b5e65ba6c3c73!2sKo%C5%9Bci%C3%B3%C5%82%20Rzymskokatolicki%20pw.%20%C5%9Aw.%20Marii%20Magdaleny!5e0!3m2!1spl!2spl!4v1768657446995!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <p>Kościół</p>
   </div>
   <div class="mapa-box">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2546.9136639520057!2d23.18782037686995!3d50.330861971569504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473b55229beeb30d%3A0x1ba86e17f794bfce!2sKarczma%20Pod%20Szcz%C4%99%C5%9Bliwym%20Karpiem!5e0!3m2!1spl!2spl!4v1768657396244!5m2!1spl!2spl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <p>Sala weselna</p>
   </div>
 </div>
@@ -218,12 +227,12 @@ Prosimy o potwierdzenie obecności do 31 maja 2026 roku.
 <h2>Potwierdź obecność</h2>
 <p>Wypełnij formularz poniżej</p>
 <div class="rsvp-container">
-  <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u" style="height:1400px"></iframe>
+  <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAPvKtTlURU1ITTZCVjZaUDcyVDI3SzZGWDFQTDlSMS4u"></iframe>
 </div>
 </section>
 
 <script>
-// ===== Countdown =====
+// Countdown
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
 setInterval(() => {
@@ -232,34 +241,31 @@ setInterval(() => {
   const d = Math.floor(diff / (1000*60*60*24));
   const h = Math.floor((diff / (1000*60*60)) % 24);
   const m = Math.floor((diff / (1000*60)) % 60);
-  const s = Math.floor((diff/1000)%60);
+  const s = Math.floor((diff /1000)%60);
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
-// ===== Fade-in sekcji =====
+// Fade-in sekcji
 const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.isIntersecting && e.target.classList.add('visible'));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
 },{threshold:0.2});
-sections.forEach(s=>observer.observe(s));
+sections.forEach(s => observer.observe(s));
 
-// ===== Envelope click =====
-const envelopeOverlay = document.getElementById('envelopeOverlay');
+// Envelope click
+const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
-document.body.style.overflow = "hidden"; // blokada scrolla
-seal.addEventListener('click',()=>{
-  // efekt "przełamania" stempla
-  seal.style.transform = "translateX(-50%) scale(1.3) rotate(10deg)";
-  seal.style.filter = "drop-shadow(0 10px 15px rgba(0,0,0,0.4))";
-  
-  setTimeout(()=>{
-    envelopeOverlay.style.opacity = 0;
-    envelopeOverlay.style.transform = "scale(1.05)";
-    document.body.style.overflow = "auto"; // odblokowanie scrolla
-  },600);
-  setTimeout(()=>{envelopeOverlay.style.display="none";},1200);
+seal.addEventListener('click', () => {
+  envelope.classList.add('open');
+  seal.style.animation = 'crack 0.35s forwards';
+  document.body.classList.remove('lock-scroll');
 });
-</script>
 
+@keyframes crack {
+  0%   { transform: translateX(-50%) scale(1); }
+  50%  { transform: translateX(-50%) scale(1.1) rotate(6deg); }
+  100% { transform: translateX(-50%) scale(0); opacity:0; }
+}
+</script>
 </body>
 </html>
