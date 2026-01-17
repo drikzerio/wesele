@@ -146,21 +146,12 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
   #countdown { font-size: clamp(1.2rem,3vw,1.6rem); }
 
   h2 { font-size:2.2rem; }
-  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.6rem; line-height:1.9; }
+  #drodzy p, .timeline p, .mapa-box p, #rsvp p { font-size:1.6rem; line-height:1.9; text-align:justify; }
 
   .envelope { justify-content:flex-start; }
   .seal { width:200px; height:200px; top:65%; }
 
-  /* Kolejność zdjęć i map na mobile - poprawiona */
-  #mapa .zdjecia-miejsc { display:flex; flex-direction:column; gap:1rem; }
-  #mapa .zdjecie-box:nth-child(1) { order:1; } /* Zdjęcie kościoła */
-  #mapa .mapa-box:nth-child(1) { order:2; }     /* Mapa kościoła */
-  #mapa .mapa-box:nth-child(1) p { order:3; }   /* Podpis kościoła */
-  #mapa .zdjecie-box:nth-child(2) { order:4; } /* Zdjęcie karczmy po mapie kościoła */
-  #mapa .mapa-box:nth-child(2) { order:5; }     /* Mapa karczmy */
-  #mapa .mapa-box:nth-child(2) p { order:6; }   /* Podpis karczmy */
-
-  /* Wysokość mobilna */
+  /* Zdjęcia i mapy mobilnie */
   .zdjecie-box img, .mapa-box iframe { height:300px; }
 
   /* RSVP */
@@ -169,9 +160,6 @@ h2 { text-align:center; font-size:3rem; margin-bottom:1rem; color:#000; }
 
   /* Linki świadków */
   a { color:#000; text-decoration:none; -webkit-tap-highlight-color: transparent; }
-
-  /* Akapit Drodzy! */
-  #drodzy p { text-align:justify; }
 }
 </style>
 </head>
@@ -249,6 +237,7 @@ Uroczystość zaślubin odbędzie się <strong>7 sierpnia 2026 roku o godzinie 1
 </audio>
 
 <script>
+// Countdown
 const weddingDate = new Date('2026-08-07T14:00:00').getTime();
 const countdown = document.getElementById('countdown');
 setInterval(() => {
@@ -261,12 +250,14 @@ setInterval(() => {
   countdown.innerHTML = `${d} dni ${h} godz ${m} min ${s} sek`;
 },1000);
 
+// Fade-in sekcji
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
 },{threshold:0.2});
 sections.forEach(s => observer.observe(s));
 
+// Envelope click
 const envelope = document.getElementById('envelope');
 const seal = document.getElementById('seal');
 const muzyka = document.getElementById('muzyka');
@@ -284,9 +275,25 @@ seal.addEventListener('click', () => {
   muzyka.play().catch(e=>console.log("Autoplay zablokowany", e));
 });
 
+// Pauza muzyki przy opuszczeniu strony
 document.addEventListener('visibilitychange', function() {
   if(document.hidden){ muzyka.pause(); } 
 });
+
+// ===== POPRAWNA KOLEJNOŚĆ ZDJĘĆ NA MOBILE =====
+function ustawKolejnoscMobile() {
+  if(window.innerWidth <= 768){
+    const mapaSection = document.getElementById('mapa');
+    const zdjecia = mapaSection.querySelector('.zdjecia-miejsc');
+    const karczmaZdjecie = zdjecia.querySelectorAll('.zdjecie-box')[1]; // drugie zdjęcie - karczma
+    const mapaKosciola = mapaSection.querySelectorAll('.mapa-box')[0]; // mapa kościoła
+
+    // przenieś zdjęcie karczmy tuż po mapie kościoła
+    mapaSection.insertBefore(karczmaZdjecie, mapaKosciola.nextSibling);
+  }
+}
+window.addEventListener('load', ustawKolejnoscMobile);
+window.addEventListener('resize', ustawKolejnoscMobile);
 </script>
 </body>
 </html>
